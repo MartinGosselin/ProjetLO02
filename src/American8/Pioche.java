@@ -31,6 +31,10 @@ public class Pioche extends Paquet {
 		return this.cartes.isEmpty();
 	}
 	
+	public LinkedList<Carte> getCartes(){
+		return this.cartes;
+	}
+	
 	
 	// Fonction pour remplir la pioche.
 	

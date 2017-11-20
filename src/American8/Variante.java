@@ -23,4 +23,10 @@ public class Variante {
 		}
 		this.nomVariante = nomVariante;
 	}
+	
+	
+	
+	public int getNbCarte() {
+		return this.getNbCarte();
+	}
 }
