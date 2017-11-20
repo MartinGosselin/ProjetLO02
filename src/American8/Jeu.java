@@ -51,9 +51,13 @@ public class Jeu {
 		return this.joueurs.get(rand.nextInt(this.joueurs.size()));
 	}
 	
-	//Distribu les cartes à partir d'un joueur donné.
 	
+	public void initPioche() {
+		
+	}
 	//Fonction qui instancie la pioche en fonction du nombre de carte de la variante.
+	
+	//Distribu les cartes à partir d'un joueur donné.
 	
 	//Jouertour()
 	
