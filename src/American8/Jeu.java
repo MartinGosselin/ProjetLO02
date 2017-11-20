@@ -1,13 +1,15 @@
 package American8;
 
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 
 public class Jeu {
 	
 	private static Jeu jeu;
 	private Pioche pioche;
 	private Talon talon;
-	private ArrayList<Joueur> joueurs;
+	private LinkedList<Joueur> joueurs;
+	private Variante variante;
 	
 	/**
 	 * Constructeur de la classe Jeu
@@ -15,10 +17,11 @@ public class Jeu {
 	 * @param talon Talon associé au jeu
 	 * @param joueurs Liste des joueurs associés au jeu.
 	 */
-	private Jeu(Pioche pioche,Talon talon,ArrayList<Joueur> joueurs) {
-		this.pioche=pioche;
+	private Jeu(Pioche pioche,Talon talon,LinkedList<Joueur> joueurs) {
+		this.pioche = pioche;
 		this.talon = talon;
 		this.joueurs = joueurs;
+		this.variante = null;
 	}
 	
 	/**
@@ -28,6 +31,7 @@ public class Jeu {
 		this.pioche=null;
 		this.talon=null;
 		this.joueurs=null;
+		this.variante=null;
 	}
 	
 	/**

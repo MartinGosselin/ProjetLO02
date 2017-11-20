@@ -1,6 +1,6 @@
 package American8;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Pioche extends Paquet {
 
@@ -8,7 +8,7 @@ public class Pioche extends Paquet {
 	 * Constructeur de la classe Pioche
 	 * @param cartes la liste de Carte représentant la pioche.
 	 */
-	public Pioche(ArrayList cartes) {
+	public Pioche(LinkedList cartes) {
 		super(cartes);
 	}
 

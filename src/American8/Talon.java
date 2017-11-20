@@ -1,6 +1,6 @@
 package American8;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Talon extends Paquet {
 	
@@ -8,7 +8,7 @@ public class Talon extends Paquet {
 	 * Constructeur de la classe Talon
 	 * @param cartes la liste des cartes qui représentent le talon du jeu.
 	 */
-	public Talon(ArrayList cartes) {
+	public Talon(LinkedList cartes) {
 		super(cartes);
 	}
 	
@@ -24,9 +24,9 @@ public class Talon extends Paquet {
 	 * Méthode qui permet de vider le talon du jeu de toutes les cartes qu'il contient.
 	 * @return ArrayList<Carte> la liste des cartes du talon qui pourront être ajouter à la pioche.
 	 */
-	public ArrayList<Carte> retournerTalon(){
-		ArrayList<Carte> talon = this.cartes;
-		this.cartes= new ArrayList<Carte>();
+	public LinkedList<Carte> retournerTalon(){
+		LinkedList<Carte> talon = this.cartes;
+		this.cartes= new LinkedList<Carte>();
 		return talon;
 	}
 }
