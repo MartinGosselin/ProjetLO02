@@ -2,6 +2,7 @@ package American8;
 
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Jeu {
 	
@@ -45,13 +46,15 @@ public class Jeu {
 		return this.jeu;
 	}
 	
-	//Jouertour()
-	
-	//Selectionner un joueur pour être le distribueur.
+	public Joueur choisirDistribueur() {
+		Random rand=null;
+		return this.joueurs.get(rand.nextInt(this.joueurs.size()));
+	}
 	
 	//Distribu les cartes à partir d'un joueur donné.
 	
 	//Fonction qui instancie la pioche en fonction du nombre de carte de la variante.
 	
+	//Jouertour()
 	
 }
