@@ -41,6 +41,12 @@ public abstract class Joueur {
 		this.comptePoint = comptePoint;
 	}
 	
+	//peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
+	
+	//jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du joueur.
+	
+	
+	
 	/**
 	 * Fonction qui permet de choisir une carte à jouer.
 	 * Cette fonction sera implémenté en fonction des diffèrents types de joueurs
@@ -48,4 +54,6 @@ public abstract class Joueur {
 	 * @see JoueurReel, JoueurVirtuel
 	 */
 	public abstract Carte choisirCarteAJouer();
+	
+	
 }

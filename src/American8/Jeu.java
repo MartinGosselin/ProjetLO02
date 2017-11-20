@@ -40,4 +40,14 @@ public class Jeu {
 		}
 		return this.jeu;
 	}
+	
+	//Jouertour()
+	
+	//Selectionner un joueur pour être le distribueur.
+	
+	//Distribu les cartes à partir d'un joueur donné.
+	
+	//Fonction qui instancie la pioche en fonction du nombre de carte de la variante.
+	
+	
 }

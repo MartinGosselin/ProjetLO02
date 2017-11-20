@@ -30,4 +30,9 @@ public class Pioche extends Paquet {
 	public boolean estVide() {
 		return this.cartes.isEmpty();
 	}
+	
+	
+	// Fonction pour remplir la pioche.
+	
+	// Fonction qui renvoie la carte sur le haut du paquet.
 }
