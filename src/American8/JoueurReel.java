@@ -2,10 +2,21 @@ package American8;
 
 public class JoueurReel extends Joueur {
 	
+	/**
+	 * Constructeur de la classe Joueur
+	 * @param nom Le nom du Joueur
+	 * @param numero Le numéro du joueur dans l'ordre du jeu
+	 * @param comptePoint Le compte des points du joueur
+	 * @param main La main contenant les cartes du joueur
+	 */
 	public JoueurReel(String nom,int numero,int comptePoint, Main main) {
 		super(nom,numero,comptePoint,main);
 	}
 	
+	/**
+	 * Fonction qui permet au joueur de choisir la carte qu'il va jouer.
+	 * @return La carte que le joueur réel aura décider de jouer
+	 */
 	public Carte choisirCarteAJouer() {
 		return null;
 	}

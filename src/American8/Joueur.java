@@ -5,33 +5,47 @@ public abstract class Joueur {
 	private int numero;
 	private int comptePoint;
 	private Main main;
-	
-	public Joueur(String nom,int numero,int comptePoint, Main main) {
-		this.nom=nom;
-		this.numero=numero;
-		this.comptePoint=comptePoint;
+
+	/**
+	 * Constructeur de la classe Joueur
+	 * @param nom Le nom du Joueur
+	 * @param numero Le numéro du joueur dans l'ordre du jeu
+	 * @param comptePoint Le compte des points du joueur
+	 * @param main La main contenant les cartes du joueur
+	 */
+	public Joueur(String nom, int numero, int comptePoint, Main main) {
+
+		this.nom = nom;
+		this.numero = numero;
+		this.comptePoint = comptePoint;
 		this.main = main;
 	}
-	
+
 	public String getNom() {
 		return this.nom;
 	}
-	
+
 	public int getNumero() {
 		return this.numero;
 	}
-	
+
 	public int getComptePoint() {
 		return this.comptePoint;
 	}
-	
+
 	public Main getMain() {
 		return this.main;
 	}
-	
+
 	public void setComptePoint(int comptePoint) {
-		this.comptePoint=comptePoint;
+		this.comptePoint = comptePoint;
 	}
 	
+	/**
+	 * Fonction qui permet de choisir une carte à jouer.
+	 * Cette fonction sera implémenté en fonction des diffèrents types de joueurs
+	 * @return La carte à jouer
+	 * @see JoueurReel, JoueurVirtuel
+	 */
 	public abstract Carte choisirCarteAJouer();
 }
