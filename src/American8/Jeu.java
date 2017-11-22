@@ -69,6 +69,10 @@ public class Jeu {
 	public void setVariante(Variante variante) {
 		this.variante=variante;
 	}
+	
+	public LinkedList<Joueur> getJoueurs(){
+		return this.joueurs;
+	}
 
 	/**
 	 * méthode qui détermine aléatoirement un joueur et qui le désigne comme
@@ -77,7 +81,7 @@ public class Jeu {
 	 * @return le joueur désigné.
 	 */
 	public Joueur choisirDistribueur() {
-		Random rand = null;
+		Random rand= new Random();
 		return this.joueurs.get(rand.nextInt(this.joueurs.size()));
 	}
 
@@ -90,9 +94,7 @@ public class Jeu {
 		case 52:
 			for (int valeur : Carte.VALEURS) {
 				for (String couleur : Carte.COULEURS) {
-					Carte c = new Carte(couleur, valeur);
-					System.out.println(c);
-					this.pioche.getCartes().add(c);
+					this.pioche.getCartes().add(new Carte(couleur, valeur));
 				}
 			};
 		}

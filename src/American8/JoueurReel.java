@@ -1,5 +1,7 @@
 package American8;
 
+import java.util.LinkedList;
+
 public class JoueurReel extends Joueur {
 	
 	/**
@@ -11,6 +13,10 @@ public class JoueurReel extends Joueur {
 	 */
 	public JoueurReel(String nom,int comptePoint, Main main) {
 		super(nom,comptePoint,main);
+	}
+	
+	public JoueurReel(String nom) {
+		super(nom,0,new Main(new LinkedList<Carte>()));
 	}
 	
 	/**
