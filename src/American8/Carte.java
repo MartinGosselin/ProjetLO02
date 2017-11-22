@@ -26,5 +26,8 @@ public class Carte {
 		return this.valeur;
 	}
 	
+	public String toString() {
+		return ""+this.valeur+" "+this.couleur;
+	}
 	
 }
