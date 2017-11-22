@@ -24,9 +24,13 @@ public class Variante {
 		this.nomVariante = nomVariante;
 	}
 	
+	public Variante() {
+		this.nomVariante ="Defaut";
+	}
+	
 	
 	
 	public int getNbCarte() {
-		return this.getNbCarte();
+		return this.nbCarte;
 	}
 }

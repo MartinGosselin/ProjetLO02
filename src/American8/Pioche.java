@@ -28,17 +28,9 @@ public class Pioche extends Paquet {
 
 	}
 	
-	/**
-	 * Méthode qui permet de vérifier si la pioche vide
-	 * @return boolean true si la pioche est vide, false sinon.
-	 */
-	public boolean estVide() {
-		return this.cartes.isEmpty();
-	}
 	
-	public LinkedList<Carte> getCartes(){
-		return this.cartes;
-	}
+	
+	
 	
 	
 	// Fonction pour remplir la pioche.

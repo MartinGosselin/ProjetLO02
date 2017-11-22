@@ -32,10 +32,10 @@ public class Jeu {
 	 * Constructeur par défaut de la classe Jeu
 	 */
 	private Jeu() {
-		this.pioche = null;
-		this.talon = null;
-		this.joueurs = null;
-		this.variante = null;
+		this.pioche = new Pioche();
+		this.talon = new Talon();
+		this.joueurs = new LinkedList<Joueur>();
+		this.variante = new Variante();
 	}
 
 	/**
@@ -48,6 +48,10 @@ public class Jeu {
 			Jeu.jeu = new Jeu();
 		}
 		return Jeu.jeu;
+	}
+	
+	public Pioche getPioche() {
+		return this.pioche;
 	}
 	
 	public void setPioche(Pioche pioche) {
@@ -82,12 +86,13 @@ public class Jeu {
 	 * pour cette variante.
 	 */
 	public void initPioche() {
-		int nbCarte = this.variante.getNbCarte();
 		switch (this.variante.getNbCarte()) {
 		case 52:
 			for (int valeur : Carte.VALEURS) {
 				for (String couleur : Carte.COULEURS) {
-					this.pioche.getCartes().add(new Carte(couleur, valeur));
+					Carte c = new Carte(couleur, valeur);
+					System.out.println(c);
+					this.pioche.getCartes().add(c);
 				}
 			};
 		}
@@ -111,6 +116,7 @@ public class Jeu {
 			}
 		}
 	}
+	
 
 	// Jouertour()
 

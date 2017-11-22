@@ -12,6 +12,10 @@ public class Talon extends Paquet {
 		super(cartes);
 	}
 	
+	public Talon() {
+		super();
+	}
+	
 	/**
 	 * Permet d'ajouter une carte au talon du jeu.
 	 * @param carte la carte à ajouter au talon

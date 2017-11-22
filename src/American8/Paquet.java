@@ -15,16 +15,24 @@ public abstract class Paquet {
 	}
 	
 	public Paquet() {
-		this.cartes=null;
+		this.cartes= new LinkedList<Carte>();
+	}
+	
+	/**
+	 * Méthode qui permet de vérifier si le paquet est vide
+	 * @return boolean true si la pioche est vide, false sinon.
+	 */
+	public boolean estVide() {
+		return this.cartes.isEmpty();
+	}
+	
+	
+	public LinkedList<Carte> getCartes(){
+		return this.cartes;
 	}
 	
 	public String toString() {
-		String ret ="";
-		for(Carte carte:this.cartes) {
-			ret+=carte.toString();
-		}
-		
-		return ret;
+		return this.cartes.toString();
 	}
 
 }
