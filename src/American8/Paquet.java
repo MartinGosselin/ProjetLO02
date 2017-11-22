@@ -14,6 +14,10 @@ public abstract class Paquet {
 		this.cartes=cartes;
 	}
 	
+	public Paquet() {
+		this.cartes=null;
+	}
+	
 	public String toString() {
 		String ret ="";
 		for(Carte carte:this.cartes) {

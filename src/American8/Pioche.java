@@ -11,6 +11,11 @@ public class Pioche extends Paquet {
 	public Pioche(LinkedList cartes) {
 		super(cartes);
 	}
+	
+	
+	public Pioche() {
+		super();
+	}
 
 	/**
 	 * 
