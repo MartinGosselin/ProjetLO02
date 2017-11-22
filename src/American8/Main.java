@@ -16,7 +16,5 @@ public class Main extends Paquet {
 		return this.cartes;
 	}
 	
-	public void addCarte(Carte carte) {
-		this.cartes.add(carte);
-	}
+	
 }

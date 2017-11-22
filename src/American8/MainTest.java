@@ -22,7 +22,8 @@ public class MainTest {
 			joueurs.add(j2);
 			joueurs.add(j3);
 			jeu.setJoueurs(joueurs);
-			System.out.println(jeu.choisirDistribueur());
+			jeu.distribuerCartes(jeu.choisirDistribueur(), jeu.getNbCartes());
+			System.out.println(jeu.getPioche());
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());

@@ -31,6 +31,10 @@ public abstract class Paquet {
 		return this.cartes;
 	}
 	
+	public void addCarte(Carte carte) {
+		this.cartes.add(carte);
+	}
+	
 	public String toString() {
 		return this.cartes.toString();
 	}

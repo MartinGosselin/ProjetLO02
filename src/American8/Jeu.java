@@ -73,6 +73,10 @@ public class Jeu {
 	public LinkedList<Joueur> getJoueurs(){
 		return this.joueurs;
 	}
+	
+	public int getNbCartes() {
+		return this.variante.getNbCarte();
+	}
 
 	/**
 	 * méthode qui détermine aléatoirement un joueur et qui le désigne comme
