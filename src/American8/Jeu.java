@@ -43,11 +43,27 @@ public class Jeu {
 	 * 
 	 * @return l'instance du singleton Jeu
 	 */
-	public Jeu getInstance() {
-		if (this.jeu == null) {
-			this.jeu = new Jeu();
+	public static Jeu getInstance() {
+		if (Jeu.jeu == null) {
+			Jeu.jeu = new Jeu();
 		}
-		return this.jeu;
+		return Jeu.jeu;
+	}
+	
+	public void setPioche(Pioche pioche) {
+		this.pioche=pioche;
+	}
+	
+	public void setTalon(Talon talon) {
+		this.talon=talon;
+	}
+	
+	public void setJoueurs(LinkedList<Joueur> joueurs) {
+		this.joueurs=joueurs;
+	}
+	
+	public void setVariante(Variante variante) {
+		this.variante=variante;
 	}
 
 	/**
