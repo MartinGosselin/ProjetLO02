@@ -13,5 +13,14 @@ public abstract class Paquet {
 	public Paquet(LinkedList<Carte> cartes) {
 		this.cartes=cartes;
 	}
+	
+	public String toString() {
+		String ret ="";
+		for(Carte carte:this.cartes) {
+			ret+=carte.toString();
+		}
+		
+		return ret;
+	}
 
 }
