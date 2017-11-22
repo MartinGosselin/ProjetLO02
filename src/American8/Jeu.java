@@ -75,6 +75,7 @@ public class Jeu {
 				}
 			};
 		}
+<<<<<<< HEAD
 	}
 
 	/**
@@ -95,6 +96,28 @@ public class Jeu {
 		}
 	}
 
+=======
+	}
+
+	/**
+	 * Distribu les nbCartes cartes de la pioche entre les différents joueurs à partir du joueur j désigné comme distribueur.
+	 * @param j Joueur désigné comme distribueur
+	 * @param nbCarte nombre de carte à distribuer par personne.
+	 */
+	public void distribuerCartes(Joueur j, int nbCarte) {
+		int indexDepart = this.joueurs.indexOf(j);
+		int compteur = 0;
+		for(int i =0; i<nbCarte;i++) {
+			int numero =compteur%indexDepart;
+			while(numero != 0) {
+				this.joueurs.get(numero).getMain().addCarte(this.pioche.prendreCarte());
+				compteur++;
+				numero = compteur%indexDepart;
+			}
+		}
+	}
+
+>>>>>>> master
 	// Jouertour()
 
 }
