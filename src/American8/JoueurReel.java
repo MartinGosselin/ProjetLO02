@@ -9,8 +9,8 @@ public class JoueurReel extends Joueur {
 	 * @param comptePoint Le compte des points du joueur
 	 * @param main La main contenant les cartes du joueur
 	 */
-	public JoueurReel(String nom,int numero,int comptePoint, Main main) {
-		super(nom,numero,comptePoint,main);
+	public JoueurReel(String nom,int comptePoint, Main main) {
+		super(nom,comptePoint,main);
 	}
 	
 	/**

@@ -13,7 +13,7 @@ public class JoueurVirtuel extends Joueur {
 	 * @param strat Une instance de stratégie qui permet de definir le comportement en jeu du joueur virtuel.
 	 */
 	public JoueurVirtuel(String nom, int numero, int comptePoint, Main main,Strategie strat) {
-		super(nom, numero, comptePoint, main);
+		super(nom, comptePoint, main);
 		this.strat=strat;
 	}
 

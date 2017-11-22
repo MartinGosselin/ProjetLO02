@@ -2,7 +2,6 @@ package American8;
 
 public abstract class Joueur {
 	private final String nom;
-	private int numero;
 	private int comptePoint;
 	private Main main;
 
@@ -13,20 +12,15 @@ public abstract class Joueur {
 	 * @param comptePoint Le compte des points du joueur
 	 * @param main La main contenant les cartes du joueur
 	 */
-	public Joueur(String nom, int numero, int comptePoint, Main main) {
+	public Joueur(String nom, int comptePoint, Main main) {
 
 		this.nom = nom;
-		this.numero = numero;
 		this.comptePoint = comptePoint;
 		this.main = main;
 	}
 
 	public String getNom() {
 		return this.nom;
-	}
-
-	public int getNumero() {
-		return this.numero;
 	}
 
 	public int getComptePoint() {
