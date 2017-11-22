@@ -91,7 +91,7 @@ public class Jeu {
 				}
 			};
 		}
-<<<<<<< HEAD
+
 	}
 
 	/**
@@ -110,9 +110,6 @@ public class Jeu {
 				numero = compteur%indexDepart;
 			}
 		}
-	}
-
-=======
 	}
 
 	// Jouertour()
