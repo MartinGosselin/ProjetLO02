@@ -25,7 +25,10 @@ public class MainTest {
 			joueurs.add(j4);
 			jeu.setJoueurs(joueurs);
 			jeu.distribuerCartes(jeu.choisirDistribueur(), 8);
-			System.out.println(jeu.getPioche());
+			for(Joueur j:jeu.getJoueurs()) {
+				System.out.println(j);
+				System.out.println(j.getMain());
+			}
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
