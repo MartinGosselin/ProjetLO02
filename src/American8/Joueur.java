@@ -1,4 +1,5 @@
 package American8;
+import java.util.LinkedList;
 
 public abstract class Joueur {
 	private final String nom;
@@ -40,9 +41,11 @@ public abstract class Joueur {
 		this.comptePoint = comptePoint;
 	}
 
+
 	public String toString() {
 		return this.nom;
 	}
+
 
 	// fonction qui permet au joueur de récupérer une carte dans sa main
 
@@ -50,23 +53,29 @@ public abstract class Joueur {
 		this.main.cartes.add(carte);
 	}
 
-	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
-	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
+
+	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut 
+	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale. ())
+	
 public boolean peutJouerCartes(Carte carte) {
-	/*
+	LinkedList<Carte> CartePossibleAJouer= new LinkedList<Carte>();
 	for(int i=0; i<=this.main.cartes.size(); i++) {
-		if(carte instanceof this.main.cartes) {
+		if(carte.getValeur()==this.main.cartes.get(i).getValeur())  {
+			CartePossibleAJouer.add(this.main.cartes.get(i));
+		}
+		else if (carte.getCouleur()==this.main.cartes.get(i).getCouleur()) {
+			CartePossibleAJouer.add(this.main.cartes.get(i));
+		}
 			
 		}
-	}
-	*/
+	
 	return true;
 	
 }
 
-	// jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du
+	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du
 	// joueur.
-	public void jouerCarte(int numeroCarte) {
+	public void poserCarte(int numeroCarte) {
 		Carte carte = this.main.cartes.get(numeroCarte);
 		this.main.cartes.remove(carte);
 	}
