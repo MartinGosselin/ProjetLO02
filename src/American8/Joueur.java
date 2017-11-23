@@ -35,15 +35,40 @@ public abstract class Joueur {
 		this.comptePoint = comptePoint;
 	}
 	
+<<<<<<< Updated upstream
 	public String toString() {
 		return this.nom;
 	}
 	
+=======
+	// fonction qui permet au joueur de récupérer une carte dans sa main
+	
+	public void recupererCarte(Carte carte) { 
+		this.main.cartes.add(carte);
+	}
+	
+	
+>>>>>>> Stashed changes
+
+
 	//peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
+public boolean peutJouerCartes(Carte carte) {
+	for(int i=0; i<=this.main.cartes.size(); i++) {
+		if(carte instanceof this.main.cartes) {
+			
+		}
+	}
+	
+}
+
 	
 	//jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du joueur.
-	
-	
+public void jouerCarte(int numeroCarte) {
+	Carte carte= this.main.cartes.get(numeroCarte);
+	this.main.cartes.remove(carte);
+}
+
+
 	
 	/**
 	 * Fonction qui permet de choisir une carte à jouer.
