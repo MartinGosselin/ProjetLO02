@@ -55,9 +55,9 @@ public abstract class Joueur {
 
 
 	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut 
-	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale. ())
+	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
 	
-public boolean peutJouerCartes(Carte carte) {
+public LinkedList<Carte> peutJouerCartes(Carte carte) {
 	LinkedList<Carte> CartePossibleAJouer= new LinkedList<Carte>();
 	for(int i=0; i<=this.main.cartes.size(); i++) {
 		if(carte.getValeur()==this.main.cartes.get(i).getValeur())  {
@@ -65,11 +65,15 @@ public boolean peutJouerCartes(Carte carte) {
 		}
 		else if (carte.getCouleur()==this.main.cartes.get(i).getCouleur()) {
 			CartePossibleAJouer.add(this.main.cartes.get(i));
+		}	
 		}
-			
-		}
-	
-	return true;
+	if (CartePossibleAJouer==null) {
+		System.out.println("Vous ne pouvez pas jouer");
+	}
+	else{
+       System.out.println("Quelle carte voulez vous jouer?");
+	}
+	return CartePossibleAJouer;
 	
 }
 
