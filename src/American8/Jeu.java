@@ -122,6 +122,10 @@ public class Jeu {
 			}
 		}
 	}
+	
+	public void test() {
+		
+	}
 <<<<<<< Updated upstream
 	
 
