@@ -1,5 +1,6 @@
 package American8;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -92,20 +93,23 @@ public class Jeu {
 	public void initPioche() {
 		switch (this.variante.getNbCarte()) {
 		case 52:
-			for (int valeur : Carte.VALEURS) {
+			
+			for (String valeur : Carte.VALEURS) {
 				for (String couleur : Carte.COULEURS) {
 					this.pioche.getCartes().add(new Carte(couleur, valeur));
 				}
-			};
+			}
 		}
 
 	}
 
+
 	/**
-	 * Distribu les nbCartes cartes de la pioche entre les différents joueurs à partir du joueur j désigné comme distribueur.
+	 * Distribue les nbCartes cartes de la pioche entre les différents joueurs à partir du joueur j désigné comme distribueur.
 	 * @param j Joueur désigné comme distribueur
 	 * @param nbCarte nombre de carte à distribuer par personne.
 	 */
+	
 	public void distribuerCartes(Joueur j, int nbCarte) {
 		int indexDepart = this.joueurs.indexOf(j);
 		int compteur = 0;
@@ -118,8 +122,14 @@ public class Jeu {
 			}
 		}
 	}
+<<<<<<< Updated upstream
 	
 
+=======
+=======
+
+>>>>>>> Stashed changes
 	// Jouertour()
+
 
 }

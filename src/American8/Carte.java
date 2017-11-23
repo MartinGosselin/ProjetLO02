@@ -4,16 +4,18 @@ public class Carte {
 	
 	
 	private String couleur;
-	private int valeur;
+	private String valeur;
 	
-	public static final int[] VALEURS = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+	public final static String[] VALEURS = {"2","3","4","5","6","7","8","9","10","Dame","Valet","Roi","As"};
 	public final static String[] COULEURS = {"Pic", "Coeur", "Carreau", "Trefle"};
+	
+	
 	/**
 	 * Constructeur de la classe Carte
 	 * @param couleur La couleur de la carte
 	 * @param valeur La valeur de la carte
 	 */
-	public Carte(String couleur, int valeur) {
+	public Carte(String couleur, String valeur) {
 		this.couleur=couleur;
 		this.valeur=valeur;
 	}
@@ -22,7 +24,7 @@ public class Carte {
 		return this.couleur;
 	}
 	
-	public int getValeur() {
+	public String getValeur() {
 		return this.valeur;
 	}
 	

@@ -35,4 +35,8 @@ public abstract class Paquet {
 		return this.cartes.toString();
 	}
 
+	public Carte donnerCartes() {
+		Carte carte = cartes.remove(0);
+	    return carte;
+	}
 }
