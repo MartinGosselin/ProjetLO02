@@ -104,6 +104,7 @@ public class Jeu {
 				}
 			}
 		}
+		this.pioche.melanger();
 
 	}
 

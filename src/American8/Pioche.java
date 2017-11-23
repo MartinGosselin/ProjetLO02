@@ -1,5 +1,6 @@
 package American8;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Pioche extends Paquet {
@@ -17,6 +18,9 @@ public class Pioche extends Paquet {
 		super();
 	}
 	
+	public void melanger() {
+		Collections.shuffle(this.cartes);
+	}
 
 	/**
 	 * 
