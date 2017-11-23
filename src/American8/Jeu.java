@@ -114,21 +114,19 @@ public class Jeu {
 	 * @param nbCarte nombre de carte à distribuer par personne.
 	 */
 	
-	public void distribuerCartes(Joueur j, int nbCarte) {
-		int indexDepart = this.joueurs.indexOf(j);
-		int compteur = 0;
+	public void distribuerCartes(Joueur joueur, int nbCarte) {
+		int indexDepart = this.joueurs.indexOf(joueur);
+		int compteur = indexDepart;		
+		int nbJoueur =this.joueurs.size();
 		for(int i =0; i<nbCarte;i++) {
-			int numero =compteur%indexDepart;
-			while(numero != 0) {
-				this.joueurs.get(numero).getMain().addCarte(this.pioche.prendreCarte());
+			for(int j=0;j<nbJoueur;j++) {
 				compteur++;
-				numero = compteur%indexDepart;
+				if(compteur==nbJoueur) {
+					compteur=0;
+				}
+				this.joueurs.get(compteur).getMain().addCarte(this.pioche.prendreCarte());
 			}
 		}
-	}
-	
-	public void test() {
-		
 	}
 
 	// Jouertour()

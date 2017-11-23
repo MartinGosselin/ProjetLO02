@@ -7,10 +7,15 @@ public abstract class Joueur {
 
 	/**
 	 * Constructeur de la classe Joueur
-	 * @param nom Le nom du Joueur
-	 * @param numero Le numéro du joueur dans l'ordre du jeu
-	 * @param comptePoint Le compte des points du joueur
-	 * @param main La main contenant les cartes du joueur
+	 * 
+	 * @param nom
+	 *            Le nom du Joueur
+	 * @param numero
+	 *            Le numéro du joueur dans l'ordre du jeu
+	 * @param comptePoint
+	 *            Le compte des points du joueur
+	 * @param main
+	 *            La main contenant les cartes du joueur
 	 */
 	public Joueur(String nom, int comptePoint, Main main) {
 
@@ -34,51 +39,45 @@ public abstract class Joueur {
 	public void setComptePoint(int comptePoint) {
 		this.comptePoint = comptePoint;
 	}
-	
-<<<<<<< Updated upstream
+
 	public String toString() {
 		return this.nom;
 	}
-	
-=======
+
 	// fonction qui permet au joueur de récupérer une carte dans sa main
-	
-	public void recupererCarte(Carte carte) { 
+
+	public void recupererCarte(Carte carte) {
 		this.main.cartes.add(carte);
 	}
-	
-	
->>>>>>> Stashed changes
 
-
-	//peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
+	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
+	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
 public boolean peutJouerCartes(Carte carte) {
+	/*
 	for(int i=0; i<=this.main.cartes.size(); i++) {
 		if(carte instanceof this.main.cartes) {
 			
 		}
 	}
+	*/
+	return true;
 	
 }
 
-	
-	//jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du joueur.
-public void jouerCarte(int numeroCarte) {
-	Carte carte= this.main.cartes.get(numeroCarte);
-	this.main.cartes.remove(carte);
-}
+	// jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du
+	// joueur.
+	public void jouerCarte(int numeroCarte) {
+		Carte carte = this.main.cartes.get(numeroCarte);
+		this.main.cartes.remove(carte);
+	}
 
-
-	
 	/**
-	 * Fonction qui permet de choisir une carte à jouer.
-	 * Cette fonction sera implémenté en fonction des diffèrents types de joueurs
+	 * Fonction qui permet de choisir une carte à jouer. Cette fonction sera
+	 * implémenté en fonction des diffèrents types de joueurs
+	 * 
 	 * @return La carte à jouer
 	 * @see JoueurReel, JoueurVirtuel
 	 */
 	public abstract Carte choisirCarteAJouer();
-	
-	
-	
-	
+
 }

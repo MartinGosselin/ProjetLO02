@@ -17,12 +17,14 @@ public class MainTest {
 			JoueurReel j1 = new JoueurReel("j1");
 			JoueurReel j2 = new JoueurReel("j2"); 
 			JoueurReel j3 = new JoueurReel("j3");
+			JoueurReel j4 = new JoueurReel("j4");
 			LinkedList<Joueur> joueurs = new LinkedList<Joueur>();
 			joueurs.add(j1);
 			joueurs.add(j2);
 			joueurs.add(j3);
+			joueurs.add(j4);
 			jeu.setJoueurs(joueurs);
-			jeu.distribuerCartes(jeu.choisirDistribueur(), jeu.getNbCartes());
+			jeu.distribuerCartes(jeu.choisirDistribueur(), 8);
 			System.out.println(jeu.getPioche());
 		}
 		catch(Exception e) {
