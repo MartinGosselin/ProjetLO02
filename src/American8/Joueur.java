@@ -40,18 +40,25 @@ public abstract class Joueur {
 	public void setComptePoint(int comptePoint) {
 		this.comptePoint = comptePoint;
 	}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 	public String toString() {
 		return this.nom;
 	}
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 	// fonction qui permet au joueur de récupérer une carte dans sa main
 
 	public void recupererCarte(Carte carte) {
 		this.main.cartes.add(carte);
 	}
+<<<<<<< Updated upstream
 
 
 	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut 
@@ -80,6 +87,27 @@ public LinkedList<Carte> peutJouerCartes(Carte carte) {
 	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du
 	// joueur.
 	public void poserCarte(int numeroCarte) {
+=======
+
+	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
+	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
+	public boolean peutJouerCartes(Carte carte) {
+		for (int i = 0; i <= this.main.cartes.size(); i++) {
+			/*
+			 * if(carte instanceof this.main.cartes) {
+			 * 
+			 * }
+			 */
+
+		}
+		return true;
+
+	}
+
+	// jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du
+	// joueur.
+	public void jouerCarte(int numeroCarte) {
+>>>>>>> Stashed changes
 		Carte carte = this.main.cartes.get(numeroCarte);
 		this.main.cartes.remove(carte);
 	}

@@ -127,10 +127,15 @@ public class Jeu {
 				}
 				this.joueurs.get(compteur).getMain().addCarte(this.pioche.prendreCarte());
 			}
+<<<<<<< Updated upstream
 		}
 	}
 
 
+=======
+		}
+	}
+>>>>>>> Stashed changes
 	// Jouertour()
 
 
