@@ -33,12 +33,11 @@ public class Pioche extends Paquet {
 
 	}
 	
-	
-	
-	
-	
-	
 	// Fonction pour remplir la pioche.
 	
+	
 	// Fonction qui renvoie la carte sur le haut du paquet.
+	public Carte CarteDuDessusPioche() {
+	return this.cartes.pop();
+	}
 }
