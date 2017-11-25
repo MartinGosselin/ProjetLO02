@@ -39,8 +39,8 @@ public abstract class Paquet {
 		return this.cartes.toString();
 	}
 
-	public Carte donnerCartes() {
-		Carte carte = cartes.remove(0);
-	    return carte;
-	}
+	// Fonction qui renvoie la carte sur le haut du paquet.
+		public Carte carteDessus() {
+			return this.cartes.pop();
+		}
 }
