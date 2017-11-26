@@ -7,8 +7,8 @@ public class PasseTour extends EffetCarte {
 	 * @param jeu l'instance du jeu en cour
 	 * @param j le joueur qui joue la carte
 	 */
-	public void appliquerEffet(Jeu jeu,Joueur j) {
-		jeu.getJoueurs().indexOf(j);
+	public int appliquerEffet(Jeu jeu,Joueur j) {
+		return jeu.getJoueurs().indexOf(j)+1;
 	}
 
 }

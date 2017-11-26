@@ -41,10 +41,19 @@ public class MainTest {
 			joueurs.add(j4);
 			jeu.setJoueurs(joueurs);
 			jeu.distribuerCartes(jeu.choisirDistribueur(), 8);
+			/*
 			for(Joueur j:jeu.getJoueurs()) {
 				System.out.println(j);
 				System.out.println(j.getMain());
 			}
+			*/
+			
+			System.out.println(jeu.getJoueurs());
+			//System.out.println(jeu.inverserSensJeu(j2));
+			System.out.println(jeu.getJoueurs());
+			
+			
+			
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());

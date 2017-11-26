@@ -1,5 +1,6 @@
 package American8;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
@@ -89,6 +90,17 @@ public class Jeu {
 		Random rand = new Random();
 		return this.joueurs.get(rand.nextInt(this.joueurs.size()));
 	}
+	
+	
+	/**
+	 * Inverse le sens du jeu à partir d'une joueur de la liste des joueurs
+	 * @param j le joueur qui sert de repaire
+	 * @return l'index du prochain joueur à jouer
+	 */
+	public int inverserSensJeu(Joueur j) {
+		Collections.reverse(this.joueurs);
+		return this.joueurs.indexOf(j);
+	}
 
 	/**
 	 * Fonction qui initialise la pioche en fonction du nombre de carte neccessaire
@@ -153,11 +165,11 @@ public class Jeu {
 	/**
 	 * Active l'effet de la carte joué par le joueur
 	 * 
-	 * @param j
-	 *            le joueur qui a joué la carte
+	 * @param j le joueur qui a joué la carte
+	 * @return l'index du prochain joueur qui jouera
 	 */
-	public void activerEffetDerniereCarte(Joueur j) {
-		this.variante.getEffetCarte(this.talon.carteDessus().getValeur()).appliquerEffet(this, j);
+	public int activerEffetDerniereCarte(Joueur j) {
+		 return this.variante.getEffetCarte(this.talon.carteDessus().getValeur()).appliquerEffet(this, j);
 	}
 
 	/**
@@ -177,7 +189,7 @@ public class Jeu {
 			}
 			if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
 				this.joueurs.get(compteur).poserCarte(this.joueurs.get(compteur).choisirCarteAJouer(), this.talon);
-				this.activerEffetDerniereCarte(this.joueurs.get(compteur));
+				compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
 			} else {
 				// gérer le cas de la pioche vide
 				this.joueurs.get(compteur).piocher(this.pioche);
