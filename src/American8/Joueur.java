@@ -1,4 +1,5 @@
 package American8;
+
 import java.util.LinkedList;
 
 public abstract class Joueur {
@@ -40,50 +41,56 @@ public abstract class Joueur {
 	public void setComptePoint(int comptePoint) {
 		this.comptePoint = comptePoint;
 	}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
 
 	public String toString() {
 		return this.nom;
 	}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
 
 =======
 >>>>>>> Stashed changes
 	// fonction qui permet au joueur de récupérer une carte dans sa main
+=======
+>>>>>>> master
 
-	public void recupererCarte(Carte carte) {
-		this.main.cartes.add(carte);
+	// fonction qui permet au joueur de récupérer une carte de la pioche.
+
+	public void piocher(Pioche pioche) {
+		this.main.getCartes().add(pioche.prendreCarte());
 	}
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 
+=======
+>>>>>>> master
 
-	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut 
+	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
 	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
-	
-public LinkedList<Carte> peutJouerCartes(Carte carte) {
-	LinkedList<Carte> CartePossibleAJouer= new LinkedList<Carte>();
-	for(int i=0; i<=this.main.cartes.size(); i++) {
-		if(carte.getValeur()==this.main.cartes.get(i).getValeur())  {
-			CartePossibleAJouer.add(this.main.cartes.get(i));
-		}
-		else if (carte.getCouleur()==this.main.cartes.get(i).getCouleur()) {
-			CartePossibleAJouer.add(this.main.cartes.get(i));
-		}	
-		}
-	if (CartePossibleAJouer==null) {
-		System.out.println("Vous ne pouvez pas jouer");
-	}
-	else{
-       System.out.println("Quelle carte voulez vous jouer?");
-	}
-	return CartePossibleAJouer;
-	
-}
 
+	public boolean peutJouerCartes(Carte carte) {
+		LinkedList<Carte> CartePossibleAJouer = new LinkedList<Carte>();
+		for (int i = 0; i < this.main.cartes.size(); i++) {
+			if (carte.getValeur() == this.main.cartes.get(i).getValeur()) {
+				CartePossibleAJouer.add(this.main.cartes.get(i));
+			} else if (carte.getCouleur() == this.main.cartes.get(i).getCouleur()) {
+				CartePossibleAJouer.add(this.main.cartes.get(i));
+			}
+		}
+		//Bonne initiative mais on doit pas mettre d'affichage dans les fonctions du moteur de jeu parceque sinon ça posera des problèmes pour l'interface graphique plus tard.
+		return (CartePossibleAJouer.size()==0);
+
+	}
+
+<<<<<<< HEAD
 	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du
 	// joueur.
 	public void poserCarte(int numeroCarte) {
@@ -109,7 +116,12 @@ public LinkedList<Carte> peutJouerCartes(Carte carte) {
 	public void jouerCarte(int numeroCarte) {
 >>>>>>> Stashed changes
 		Carte carte = this.main.cartes.get(numeroCarte);
+=======
+	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du joueur.
+	public void poserCarte(Carte carte, Talon talon) {
+>>>>>>> master
 		this.main.cartes.remove(carte);
+		talon.addCarte(carte);
 	}
 
 	/**

@@ -76,7 +76,7 @@ public class Jeu {
 	}
 	
 	public int getNbCartes() {
-		return this.variante.getNbCarte();
+		return this.variante.getNbCartePaquet();
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Jeu {
 	 * pour cette variante.
 	 */
 	public void initPioche() {
-		switch (this.variante.getNbCarte()) {
+		switch (this.variante.getNbCartePaquet()) {
 		case 52:
 			
 			for (String valeur : Carte.VALEURS) {
@@ -125,11 +125,12 @@ public class Jeu {
 				if(compteur==nbJoueur) {
 					compteur=0;
 				}
-				this.joueurs.get(compteur).getMain().addCarte(this.pioche.prendreCarte());
+				this.joueurs.get(compteur).piocher(this.pioche);
 			}
 <<<<<<< Updated upstream
 		}
 	}
+<<<<<<< HEAD
 
 
 =======
@@ -137,6 +138,39 @@ public class Jeu {
 	}
 >>>>>>> Stashed changes
 	// Jouertour()
+=======
+	
+	/**
+	 * Fonction qui effectue un tour du jeu
+	 * @param j le joueur qui a distribué les cartes.
+	 */
+	public void jouerTour(Joueur j) {
+		int indexDepart =this.joueurs.indexOf(j);
+		int compteur = indexDepart;		
+		int nbJoueur =this.joueurs.size();
+		for(int i=0;i<nbJoueur;i++) {
+			compteur++;
+			if(compteur==nbJoueur) {
+				compteur=0;
+			}
+			if(this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())){
+				this.joueurs.get(compteur).poserCarte(this.joueurs.get(compteur).choisirCarteAJouer(), this.talon);
+			}
+			else {
+				this.joueurs.get(compteur).piocher(this.pioche);
+			}
+			
+		}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+>>>>>>> master
 
 
 }

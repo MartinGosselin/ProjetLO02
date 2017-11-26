@@ -1,25 +1,31 @@
 package American8;
 
+import java.util.HashMap;
+
 public class Variante {
 	
 	public static final int[] jeuPossible = {32,52,54}; 
-	private int nbCarte = 0;
+	public static final String[] effetCarteExistant = {"ChangerSens","Ajoute4Cartes","PasseTour","ChangerCouleur","Ajouter2Cartes"};
+	private int nbCartePaquet = 0;
 	private String nomVariante;
+	private HashMap<String,String> effetCarteVariante;
 	
 	
 	/**
 	 * 
-	 * @param nbCartes nombre de carte de la variante
+	 * @param nbCartePaquets nombre de carte de la variante
 	 * @param nomVariante nom de la variante
 	 */
-	public Variante(int nbCarte,String nomVariante) throws NombreCarteNonValideException {
+	public Variante(int nbCartePaquet,String nomVariante) throws NombreCarteNonValideException {
 		for(int nb : Variante.jeuPossible ) {
-			if(nbCarte == nb) {
-				this.nbCarte=nbCarte;
+			if(nbCartePaquet == nb) {
+				this.nbCartePaquet=nbCartePaquet;
 			}
 		}
-		if(this.nbCarte==0) {
+		if(this.nbCartePaquet==0) {
 			throw new NombreCarteNonValideException("Ce nombre de cartes ne représente pas un jeu valide.");
+			
+			
 		}
 		this.nomVariante = nomVariante;
 	}
@@ -28,9 +34,7 @@ public class Variante {
 		this.nomVariante ="Defaut";
 	}
 	
-	
-	
-	public int getNbCarte() {
-		return this.nbCarte;
+	public int getNbCartePaquet() {
+		return this.nbCartePaquet;
 	}
 }
