@@ -103,6 +103,23 @@ public class Jeu {
 					this.pioche.getCartes().add(new Carte(couleur, valeur));
 				}
 			}
+
+		case 32:
+			for (int i = 7; i < 14; i++) {
+				for (String couleur : Carte.COULEURS) {
+					this.pioche.getCartes().add(new Carte(couleur, Carte.VALEURS[i]));
+				}
+			}
+
+		case 54:
+			for (String valeur : Carte.VALEURS) {
+				for (String couleur : Carte.COULEURS) {
+					this.pioche.getCartes().add(new Carte(couleur, valeur));
+				}
+			}
+			this.pioche.getCartes().add(new Carte("Joker", "Carreau"));
+			this.pioche.getCartes().add(new Carte("Joker", "Pique"));
+
 		}
 		this.pioche.melanger();
 
@@ -134,7 +151,17 @@ public class Jeu {
 	}
 
 	/**
-	 * Fonction qui effectue un tour du jeu
+	 * Active l'effet de la carte joué par le joueur
+	 * 
+	 * @param j
+	 *            le joueur qui a joué la carte
+	 */
+	public void activerEffetDerniereCarte(Joueur j) {
+		this.variante.getEffetCarte(this.talon.carteDessus().getValeur()).appliquerEffet(this, j);
+	}
+
+	/**
+	 * Fonction qui effectue un tour pour tout les joueurs du jeu.
 	 * 
 	 * @param j
 	 *            le joueur qui a distribué les cartes.
@@ -150,7 +177,9 @@ public class Jeu {
 			}
 			if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
 				this.joueurs.get(compteur).poserCarte(this.joueurs.get(compteur).choisirCarteAJouer(), this.talon);
+				this.activerEffetDerniereCarte(this.joueurs.get(compteur));
 			} else {
+				// gérer le cas de la pioche vide
 				this.joueurs.get(compteur).piocher(this.pioche);
 			}
 

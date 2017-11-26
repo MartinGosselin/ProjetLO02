@@ -5,8 +5,6 @@ import java.util.HashMap;
 public class Variante {
 
 	public static final int[] jeuPossible = { 32, 52, 54 };
-	public static final EffetCarte[] effetCarteExistant = { new PasseTour(), new Ajoute4Cartes(), new PasseTour(),
-			new ChangerCouleur(), new Ajoute2Cartes() };
 	private int nbCartePaquet = 0;
 	private String nomVariante;
 	private HashMap<String, EffetCarte> effetsCartes;
@@ -39,5 +37,9 @@ public class Variante {
 
 	public int getNbCartePaquet() {
 		return this.nbCartePaquet;
+	}
+	
+	public EffetCarte getEffetCarte(String valeur) {
+		return this.effetsCartes.get(valeur);
 	}
 }
