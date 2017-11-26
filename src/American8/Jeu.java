@@ -90,11 +90,12 @@ public class Jeu {
 		Random rand = new Random();
 		return this.joueurs.get(rand.nextInt(this.joueurs.size()));
 	}
-	
-	
+
 	/**
 	 * Inverse le sens du jeu à partir d'une joueur de la liste des joueurs
-	 * @param j le joueur qui sert de repaire
+	 * 
+	 * @param j
+	 *            le joueur qui sert de repaire
 	 * @return l'index du prochain joueur à jouer
 	 */
 	public int inverserSensJeu(Joueur j) {
@@ -109,7 +110,6 @@ public class Jeu {
 	public void initPioche() {
 		switch (this.variante.getNbCartePaquet()) {
 		case 52:
-
 			for (String valeur : Carte.VALEURS) {
 				for (String couleur : Carte.COULEURS) {
 					this.pioche.getCartes().add(new Carte(couleur, valeur));
@@ -117,7 +117,7 @@ public class Jeu {
 			}
 
 		case 32:
-			for (int i = 7; i < 14; i++) {
+			for (int i = 7; i < 13; i++) {
 				for (String couleur : Carte.COULEURS) {
 					this.pioche.getCartes().add(new Carte(couleur, Carte.VALEURS[i]));
 				}
@@ -165,11 +165,12 @@ public class Jeu {
 	/**
 	 * Active l'effet de la carte joué par le joueur
 	 * 
-	 * @param j le joueur qui a joué la carte
+	 * @param j
+	 *            le joueur qui a joué la carte
 	 * @return l'index du prochain joueur qui jouera
 	 */
 	public int activerEffetDerniereCarte(Joueur j) {
-		 return this.variante.getEffetCarte(this.talon.carteDessus().getValeur()).appliquerEffet(this, j);
+		return this.variante.getEffetCarte(this.talon.carteDessus().getValeur()).appliquerEffet(this, j);
 	}
 
 	/**

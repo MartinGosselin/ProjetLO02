@@ -6,6 +6,7 @@ public abstract class Joueur {
 	private final String nom;
 	private int comptePoint;
 	private Main main;
+	private String handicapCouleur;
 
 	/**
 	 * Constructeur de la classe Joueur
@@ -24,6 +25,7 @@ public abstract class Joueur {
 		this.nom = nom;
 		this.comptePoint = comptePoint;
 		this.main = main;
+		this.handicapCouleur = null;
 	}
 
 	public String getNom() {
@@ -41,14 +43,15 @@ public abstract class Joueur {
 	public void setComptePoint(int comptePoint) {
 		this.comptePoint = comptePoint;
 	}
+	
+	public void appliquerHandicapCouleur(String couleur) {
+		this.handicapCouleur = couleur;
+	}
 
 
 	public String toString() {
 		return this.nom;
 	}
-
-
-	// fonction qui permet au joueur de récupérer une carte dans sa main
 
 
 	// fonction qui permet au joueur de récupérer une carte de la pioche.

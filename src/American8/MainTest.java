@@ -7,7 +7,7 @@ public class MainTest {
 
 	public static void main(String[] args) {
 		try {
-			//Test sur initPioche()
+			
 			HashMap<String,EffetCarte> effetsCartes = new HashMap<String,EffetCarte>();
 			effetsCartes.put("2",new Ajoute2Cartes());
 			effetsCartes.put("3",new AucunEffet());
@@ -23,35 +23,41 @@ public class MainTest {
 			effetsCartes.put("Roi",new AucunEffet());
 			effetsCartes.put("As",new ChangerSens());
 			effetsCartes.put("Joker",new Ajoute4Cartes());
-			Variante variante = new Variante(52,"test",effetsCartes);
+			
+			Variante variante = new Variante(32,"test",effetsCartes);
+			
 			Jeu jeu = Jeu.getInstance();
 			jeu.setVariante(variante);
-			jeu.initPioche();
-			//System.out.println(jeu.getPioche());
 			
-			//test sur distribuerCartes()
+			jeu.initPioche();
+			
+			//System.out.println(jeu.getPioche());
 			JoueurReel j1 = new JoueurReel("j1");
 			JoueurReel j2 = new JoueurReel("j2"); 
 			JoueurReel j3 = new JoueurReel("j3");
 			JoueurReel j4 = new JoueurReel("j4");
+			JoueurReel j5 = new JoueurReel("j5");
 			LinkedList<Joueur> joueurs = new LinkedList<Joueur>();
 			joueurs.add(j1);
 			joueurs.add(j2);
 			joueurs.add(j3);
 			joueurs.add(j4);
+			joueurs.add(j5);
+			
 			jeu.setJoueurs(joueurs);
 			jeu.distribuerCartes(jeu.choisirDistribueur(), 8);
+			
 			/*
 			for(Joueur j:jeu.getJoueurs()) {
 				System.out.println(j);
 				System.out.println(j.getMain());
 			}
+			
+			
+			System.out.println(jeu.getJoueurs());
+			System.out.println(jeu.inverserSensJeu(j2));
+			System.out.println(jeu.getJoueurs());
 			*/
-			
-			System.out.println(jeu.getJoueurs());
-			//System.out.println(jeu.inverserSensJeu(j2));
-			System.out.println(jeu.getJoueurs());
-			
 			
 			
 		}

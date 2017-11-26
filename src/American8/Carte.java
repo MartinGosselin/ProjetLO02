@@ -5,8 +5,7 @@ public class Carte {
 	private String couleur;
 	private String valeur;
 
-	public final static String[] VALEURS = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Dame", "Valet", "Roi",
-			"As" };
+	public final static String[] VALEURS = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Dame", "Valet", "Roi","As" };
 	public final static String[] COULEURS = { "Pic", "Coeur", "Carreau", "Trefle" };
 	public static final EffetCarte[] effetCarteExistant = { new PasseTour(), new Ajoute4Cartes(), new PasseTour(),
 			new ChangerCouleur(), new Ajoute2Cartes() };
