@@ -50,31 +50,31 @@ public class Jeu {
 		}
 		return Jeu.jeu;
 	}
-	
+
 	public Pioche getPioche() {
 		return this.pioche;
 	}
-	
+
 	public void setPioche(Pioche pioche) {
-		this.pioche=pioche;
+		this.pioche = pioche;
 	}
-	
+
 	public void setTalon(Talon talon) {
-		this.talon=talon;
+		this.talon = talon;
 	}
-	
+
 	public void setJoueurs(LinkedList<Joueur> joueurs) {
-		this.joueurs=joueurs;
+		this.joueurs = joueurs;
 	}
-	
+
 	public void setVariante(Variante variante) {
-		this.variante=variante;
+		this.variante = variante;
 	}
-	
-	public LinkedList<Joueur> getJoueurs(){
+
+	public LinkedList<Joueur> getJoueurs() {
 		return this.joueurs;
 	}
-	
+
 	public int getNbCartes() {
 		return this.variante.getNbCartePaquet();
 	}
@@ -86,7 +86,7 @@ public class Jeu {
 	 * @return le joueur désigné.
 	 */
 	public Joueur choisirDistribueur() {
-		Random rand= new Random();
+		Random rand = new Random();
 		return this.joueurs.get(rand.nextInt(this.joueurs.size()));
 	}
 
@@ -97,7 +97,7 @@ public class Jeu {
 	public void initPioche() {
 		switch (this.variante.getNbCartePaquet()) {
 		case 52:
-			
+
 			for (String valeur : Carte.VALEURS) {
 				for (String couleur : Carte.COULEURS) {
 					this.pioche.getCartes().add(new Carte(couleur, valeur));
@@ -108,69 +108,54 @@ public class Jeu {
 
 	}
 
-
 	/**
-	 * Distribue les nbCartes cartes de la pioche entre les différents joueurs à partir du joueur j désigné comme distribueur.
-	 * @param j Joueur désigné comme distribueur
-	 * @param nbCarte nombre de carte à distribuer par personne.
+	 * Distribue les nbCartes cartes de la pioche entre les différents joueurs à
+	 * partir du joueur j désigné comme distribueur.
+	 * 
+	 * @param j
+	 *            Joueur désigné comme distribueur
+	 * @param nbCarte
+	 *            nombre de carte à distribuer par personne.
 	 */
-	
+
 	public void distribuerCartes(Joueur joueur, int nbCarte) {
 		int indexDepart = this.joueurs.indexOf(joueur);
-		int compteur = indexDepart;		
-		int nbJoueur =this.joueurs.size();
-		for(int i =0; i<nbCarte;i++) {
-			for(int j=0;j<nbJoueur;j++) {
+		int compteur = indexDepart;
+		int nbJoueur = this.joueurs.size();
+		for (int i = 0; i < nbCarte; i++) {
+			for (int j = 0; j < nbJoueur; j++) {
 				compteur++;
-				if(compteur==nbJoueur) {
-					compteur=0;
+				if (compteur == nbJoueur) {
+					compteur = 0;
 				}
 				this.joueurs.get(compteur).piocher(this.pioche);
 			}
-<<<<<<< Updated upstream
 		}
 	}
-<<<<<<< HEAD
 
-
-=======
-		}
-	}
->>>>>>> Stashed changes
-	// Jouertour()
-=======
-	
 	/**
 	 * Fonction qui effectue un tour du jeu
-	 * @param j le joueur qui a distribué les cartes.
+	 * 
+	 * @param j
+	 *            le joueur qui a distribué les cartes.
 	 */
 	public void jouerTour(Joueur j) {
-		int indexDepart =this.joueurs.indexOf(j);
-		int compteur = indexDepart;		
-		int nbJoueur =this.joueurs.size();
-		for(int i=0;i<nbJoueur;i++) {
+		int indexDepart = this.joueurs.indexOf(j);
+		int compteur = indexDepart;
+		int nbJoueur = this.joueurs.size();
+		for (int i = 0; i < nbJoueur; i++) {
 			compteur++;
-			if(compteur==nbJoueur) {
-				compteur=0;
+			if (compteur == nbJoueur) {
+				compteur = 0;
 			}
-			if(this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())){
+			if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
 				this.joueurs.get(compteur).poserCarte(this.joueurs.get(compteur).choisirCarteAJouer(), this.talon);
-			}
-			else {
+			} else {
 				this.joueurs.get(compteur).piocher(this.pioche);
 			}
-			
-		}
-	
-	}
-	
-	
-	
-	
-	
-	
-	
->>>>>>> master
 
+		}
+
+	}
 
 }

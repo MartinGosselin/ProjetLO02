@@ -1,5 +1,6 @@
 package American8;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class MainTest {
@@ -7,7 +8,7 @@ public class MainTest {
 	public static void main(String[] args) {
 		try {
 			//Test sur initPioche()
-			Variante variante = new Variante(52,"test");
+			Variante variante = new Variante(52,"test",new HashMap<String,EffetCarte>());
 			Jeu jeu = Jeu.getInstance();
 			jeu.setVariante(variante);
 			jeu.initPioche();

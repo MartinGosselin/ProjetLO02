@@ -41,38 +41,21 @@ public abstract class Joueur {
 	public void setComptePoint(int comptePoint) {
 		this.comptePoint = comptePoint;
 	}
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> master
 
 	public String toString() {
 		return this.nom;
 	}
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 
 
-=======
->>>>>>> Stashed changes
 	// fonction qui permet au joueur de récupérer une carte dans sa main
-=======
->>>>>>> master
+
 
 	// fonction qui permet au joueur de récupérer une carte de la pioche.
 
 	public void piocher(Pioche pioche) {
 		this.main.getCartes().add(pioche.prendreCarte());
 	}
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-
-=======
->>>>>>> master
-
 	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
 	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
 
@@ -90,36 +73,15 @@ public abstract class Joueur {
 
 	}
 
-<<<<<<< HEAD
-	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du
-	// joueur.
-	public void poserCarte(int numeroCarte) {
-=======
 
-	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
-	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
-	public boolean peutJouerCartes(Carte carte) {
-		for (int i = 0; i <= this.main.cartes.size(); i++) {
-			/*
-			 * if(carte instanceof this.main.cartes) {
-			 * 
-			 * }
-			 */
-
-		}
-		return true;
-
-	}
 
 	// jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du
 	// joueur.
 	public void jouerCarte(int numeroCarte) {
->>>>>>> Stashed changes
 		Carte carte = this.main.cartes.get(numeroCarte);
-=======
+	}
 	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du joueur.
 	public void poserCarte(Carte carte, Talon talon) {
->>>>>>> master
 		this.main.cartes.remove(carte);
 		talon.addCarte(carte);
 	}
