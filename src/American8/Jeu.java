@@ -76,7 +76,7 @@ public class Jeu {
 	}
 	
 	public int getNbCartes() {
-		return this.variante.getNbCarte();
+		return this.variante.getNbCartePaquet();
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Jeu {
 	 * pour cette variante.
 	 */
 	public void initPioche() {
-		switch (this.variante.getNbCarte()) {
+		switch (this.variante.getNbCartePaquet()) {
 		case 52:
 			
 			for (String valeur : Carte.VALEURS) {
