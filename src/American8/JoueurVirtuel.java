@@ -21,10 +21,11 @@ public class JoueurVirtuel extends Joueur {
 	/**
 	 * Fonction qui permet de définir la carte qui sera joué par le joueur virtuel.
 	 * On utilise la fonction choisirCarteAJouer() de l'instance de la classe Strategie en attribut de notre objet.
+	 * @param carte La carte du dessus du talon.
 	 */
 	@Override
-	public Carte choisirCarteAJouer() {
-		return this.strat.choisirCarteAJouer();
+	public Carte choisirCarteAJouer(Carte carte) {
+		return this.strat.choisirCarteAJouer(this.main.getCartes(),carte);
 	}
 
 }

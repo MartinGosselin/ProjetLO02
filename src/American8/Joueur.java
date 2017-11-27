@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public abstract class Joueur {
 	private final String nom;
 	private int comptePoint;
-	private Main main;
+	protected Main main;
 	private String handicapCouleur;
 
 	/**
@@ -96,6 +96,6 @@ public abstract class Joueur {
 	 * @return La carte à jouer
 	 * @see JoueurReel, JoueurVirtuel
 	 */
-	public abstract Carte choisirCarteAJouer();
+	public abstract Carte choisirCarteAJouer(Carte carte);
 
 }

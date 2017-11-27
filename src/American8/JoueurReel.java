@@ -23,7 +23,7 @@ public class JoueurReel extends Joueur {
 	 * Fonction qui permet au joueur de choisir la carte qu'il va jouer.
 	 * @return La carte que le joueur réel aura décider de jouer
 	 */
-	public Carte choisirCarteAJouer() {
+	public Carte choisirCarteAJouer(Carte carte) {
 		return null;
 	}
 
