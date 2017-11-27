@@ -199,5 +199,7 @@ public class Jeu {
 		}
 
 	}
+	
+	//Fonction qui sert de condition d'arret.
 
 }
