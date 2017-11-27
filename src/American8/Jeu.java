@@ -184,22 +184,33 @@ public class Jeu {
 		int compteur = indexDepart;
 		int nbJoueur = this.joueurs.size();
 		for (int i = 0; i < nbJoueur; i++) {
-			compteur++;
-			if (compteur == nbJoueur) {
-				compteur = 0;
-			}
-			if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
-				this.joueurs.get(compteur).poserCarte(this.joueurs.get(compteur).choisirCarteAJouer(this.talon.carteDessus()), this.talon);
-				compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
-			} else {
-				// gérer le cas de la pioche vide
-				this.joueurs.get(compteur).piocher(this.pioche);
-			}
+			if (!this.estTermine()) {
+				compteur++;
+				if (compteur == nbJoueur) {
+					compteur = 0;
+				}
+				if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
+					this.joueurs.get(compteur).poserCarte(
+							this.joueurs.get(compteur).choisirCarteAJouer(this.talon.carteDessus()), this.talon);
+					compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
+				} else {
+					// gérer le cas de la pioche vide
+					this.joueurs.get(compteur).piocher(this.pioche);
+				}
 
+			}
 		}
 
 	}
-	
-	//Fonction qui sert de condition d'arret.
+
+	public boolean estTermine() {
+		boolean termine = false;
+		for (Joueur j : this.joueurs) {
+			if (j.getMain().estVide()) {
+				termine = true;
+			}
+		}
+		return termine;
+	}
 
 }
