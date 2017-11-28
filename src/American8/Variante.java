@@ -1,6 +1,8 @@
 package American8;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Variante {
 
@@ -41,5 +43,20 @@ public class Variante {
 	
 	public EffetCarte getEffetCarte(String valeur) {
 		return this.effetsCartes.get(valeur);
+	}
+	
+	
+	
+	public ArrayList<String> getCartesAEffet(){
+		ArrayList<String> cartes = new ArrayList<String>();
+		for(String valeur : Carte.VALEURS) {
+			if(this.effetsCartes.get(valeur) instanceof EffetCarte && !(this.effetsCartes.get(valeur) instanceof AucunEffet)) {
+				cartes.add(valeur);
+			}
+		}
+		if(this.effetsCartes.get("Joker") instanceof EffetCarte && !(this.effetsCartes.get("Joker") instanceof AucunEffet)) {
+			cartes.add("Joker");
+		}
+		return cartes;
 	}
 }

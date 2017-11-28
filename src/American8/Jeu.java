@@ -191,7 +191,7 @@ public class Jeu {
 				}
 				if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
 					this.joueurs.get(compteur).poserCarte(
-							this.joueurs.get(compteur).choisirCarteAJouer(this.talon.carteDessus()), this.talon);
+							this.joueurs.get(compteur).choisirCarteAJouer(this.variante,this.talon.carteDessus()), this.talon);
 					compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
 				} else {
 					// gérer le cas de la pioche vide

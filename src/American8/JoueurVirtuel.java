@@ -24,8 +24,8 @@ public class JoueurVirtuel extends Joueur {
 	 * @param carte La carte du dessus du talon.
 	 */
 	@Override
-	public Carte choisirCarteAJouer(Carte carte) {
-		return this.strat.choisirCarteAJouer(this.main.getCartes(),carte);
+	public Carte choisirCarteAJouer(Variante v,Carte carte) {
+		return this.strat.choisirCarteAJouer(v,this.main.getCartes(),carte);
 	}
 
 }

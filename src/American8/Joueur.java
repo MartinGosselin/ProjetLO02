@@ -96,6 +96,6 @@ public abstract class Joueur {
 	 * @return La carte à jouer
 	 * @see JoueurReel, JoueurVirtuel
 	 */
-	public abstract Carte choisirCarteAJouer(Carte carte);
+	public abstract Carte choisirCarteAJouer(Variante v,Carte carte);
 
 }
