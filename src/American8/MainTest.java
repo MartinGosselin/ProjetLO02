@@ -24,7 +24,7 @@ public class MainTest {
 			effetsCartes.put("As",new ChangerSens());
 			effetsCartes.put("Joker",new Ajoute4Cartes());
 			
-			Variante variante = new Variante(32,"test",effetsCartes);
+			Variante variante = new Variante(32,"test",effetsCartes,"test");
 			System.out.println(variante.getCartesAEffet());
 			
 			Jeu jeu = Jeu.getInstance();

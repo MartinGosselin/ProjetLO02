@@ -79,6 +79,10 @@ public class Jeu {
 	public int getNbCartes() {
 		return this.variante.getNbCartePaquet();
 	}
+	
+	public Variante getVariante() {
+		return this.variante;
+	}
 
 	/**
 	 * méthode qui détermine aléatoirement un joueur et qui le désigne comme
