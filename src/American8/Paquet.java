@@ -64,7 +64,7 @@ public abstract class Paquet {
 	}
 
 	// Fonction qui renvoie la carte sur le haut du paquet.
-	public Carte carteDessus() {
-		return this.cartes.pop();
+	public Carte getCarteDessus() {
+		return this.cartes.getLast();
 	}
 }

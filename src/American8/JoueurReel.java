@@ -1,6 +1,9 @@
 package American8;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class JoueurReel extends Joueur {
 	
@@ -24,7 +27,54 @@ public class JoueurReel extends Joueur {
 	 * @return La carte que le joueur réel aura décider de jouer
 	 */
 	public Carte choisirCarteAJouer(Variante v,Carte carte) {
-		return null;
+		boolean numCarteValide = false;
+		int numCarte = -1;
+		ArrayList<Carte> cartesJouables = this.getCartesJouables(v, carte);
+		System.out.println("Voici votre main : ");
+		System.out.println(this.main);
+		System.out.println("La dernière carte posée sur le talon est : "+carte);
+		
+		System.out.println("Voici les cartes que vous pouvez jouer : ");
+		for(int i=0;i<cartesJouables.size();i++) {
+			System.out.print("Carte numéro "+(i+1)+" : ");
+			System.out.println(cartesJouables.get(i));
+		}
+		System.out.println("Veuillez donner le numéro de la carte que vous souhaitez jouer :");
+		Scanner reader = new Scanner(System.in);
+		
+		while (!numCarteValide) {
+			try {
+				numCarte = reader.nextInt()-1;
+				while (!(numCarte < cartesJouables.size() && numCarte >= 0)) {
+					System.out.println("Veuillez saisir un numero de carte valide : ");
+					numCarte = reader.nextInt()-1;
+				}
+				numCarteValide = true;
+			} catch (InputMismatchException e) {
+				System.out.println("Vous devez choisir un NUMERO de carte : ");
+				reader = new Scanner(System.in);
+			}
+
+		}		
+		return cartesJouables.get(numCarte);
+	}
+	
+	
+	public ArrayList<Carte> getCartesJouables(Variante v,Carte carte){
+		ArrayList<Carte> cartesJouables = new ArrayList<Carte>();
+		for(int i=0;i<this.getMain().getCartes().size();i++) {
+			if(this.getMain().getCartes().get(i).getValeur()==carte.getValeur() || this.getMain().getCartes().get(i).getCouleur()==carte.getCouleur()) {
+				cartesJouables.add(this.getMain().getCartes().get(i));
+			}
+		}
+		for(Carte c : this.getMain().getCartes()) {
+			for(String valeur : v.getCartesAEffet()) {
+				if(c.getValeur()==valeur&&(!cartesJouables.contains(c))) {
+					cartesJouables.add(c);
+				}
+			}
+		}
+		return cartesJouables;
 	}
 
 }

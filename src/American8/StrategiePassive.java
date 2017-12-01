@@ -38,5 +38,10 @@ public class StrategiePassive extends Strategie {
 		}
 		return cartesJouables;
 	}
+	
+	
+	public String toString() {
+		return "Strategie Passive";
+	}
 
 }

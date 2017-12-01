@@ -1,5 +1,6 @@
 package American8;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -79,9 +80,13 @@ public class Jeu {
 	public int getNbCartes() {
 		return this.variante.getNbCartePaquet();
 	}
-	
+
 	public Variante getVariante() {
 		return this.variante;
+	}
+	
+	public Talon getTalon() {
+		return this.talon;
 	}
 
 	/**
@@ -141,6 +146,10 @@ public class Jeu {
 
 	}
 
+	public void initTalon() {
+		this.talon.addCarte(this.pioche.prendreCarte());
+	}
+
 	/**
 	 * Distribue les nbCartes cartes de la pioche entre les différents joueurs à
 	 * partir du joueur j désigné comme distribueur.
@@ -155,13 +164,18 @@ public class Jeu {
 		int indexDepart = this.joueurs.indexOf(joueur);
 		int compteur = indexDepart;
 		int nbJoueur = this.joueurs.size();
+		boolean piocheVide = false;
 		for (int i = 0; i < nbCarte; i++) {
 			for (int j = 0; j < nbJoueur; j++) {
 				compteur++;
 				if (compteur == nbJoueur) {
 					compteur = 0;
 				}
-				this.joueurs.get(compteur).piocher(this.pioche);
+				piocheVide = !this.joueurs.get(compteur).piocher(this.pioche);
+				if (piocheVide) {
+					this.setPioche(new Pioche(this.talon.retournerTalon()));
+					this.joueurs.get(compteur).piocher(this.pioche);
+				}
 			}
 		}
 	}
@@ -174,47 +188,67 @@ public class Jeu {
 	 * @return l'index du prochain joueur qui jouera
 	 */
 	public int activerEffetDerniereCarte(Joueur j) {
-		return this.variante.getEffetCarte(this.talon.carteDessus().getValeur()).appliquerEffet(this, j);
+		return this.variante.getEffetCarte(this.talon.getCarteDessus().getValeur()).appliquerEffet(this, j);
 	}
 
 	/**
-	 * Fonction qui effectue un tour pour tout les joueurs du jeu.
+	 * Méthode qui simule le déroulement du jeu
 	 * 
 	 * @param j
 	 *            le joueur qui a distribué les cartes.
 	 */
-	public void jouerTour(Joueur j) {
+	public int jouer(Joueur j) {
 		int indexDepart = this.joueurs.indexOf(j);
 		int compteur = indexDepart;
 		int nbJoueur = this.joueurs.size();
-		for (int i = 0; i < nbJoueur; i++) {
-			if (!this.estTermine()) {
-				compteur++;
-				if (compteur == nbJoueur) {
-					compteur = 0;
-				}
-				if (this.joueurs.get(compteur).peutJouerCartes(this.talon.carteDessus())) {
-					this.joueurs.get(compteur).poserCarte(
-							this.joueurs.get(compteur).choisirCarteAJouer(this.variante,this.talon.carteDessus()), this.talon);
-					compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
-				} else {
-					// gérer le cas de la pioche vide
+		boolean piocheVide = false;
+		while (!this.estTermine()) {
+			compteur++;
+			if (compteur >= nbJoueur) {
+				compteur = 0;
+			}
+			if (this.joueurs.get(compteur).peutJouerCartes(this.talon.getCarteDessus(), this.variante)) {
+				this.joueurs.get(compteur).poserCarte(
+						this.joueurs.get(compteur).choisirCarteAJouer(this.variante, this.talon.getCarteDessus()),
+						this.talon);
+				System.out.println(this.joueurs.get(compteur)+" pose un "+this.talon.getCarteDessus());
+				compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
+			} else {
+				piocheVide = !this.joueurs.get(compteur).piocher(this.pioche);
+				System.out.println(this.joueurs.get(compteur)+" ne pouvait pas poser de carte ! Il pioche !");
+				if(piocheVide) {
+					this.pioche = new Pioche(this.talon.retournerTalon());
 					this.joueurs.get(compteur).piocher(this.pioche);
 				}
-
 			}
+			try {
+				Thread.sleep(3000);
+			}
+			catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+
 		}
+		return compteur;
 
 	}
 
 	public boolean estTermine() {
-		boolean termine = false;
 		for (Joueur j : this.joueurs) {
 			if (j.getMain().estVide()) {
-				termine = true;
+				return true;
 			}
 		}
-		return termine;
+		return false;
+	}
+
+	public static ArrayList<JoueurVirtuel> initJoueurVirtuel(int nb) {
+		ArrayList<JoueurVirtuel> array = new ArrayList<JoueurVirtuel>();
+		for (int i = 1; i <= nb; i++) {
+			array.add(new JoueurVirtuel("J" + i));
+		}
+		return array;
 	}
 
 }

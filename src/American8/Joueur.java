@@ -1,12 +1,12 @@
 package American8;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class Joueur {
 	private final String nom;
 	private int comptePoint;
 	protected Main main;
-	private String handicapCouleur;
 
 	/**
 	 * Constructeur de la classe Joueur
@@ -21,11 +21,9 @@ public abstract class Joueur {
 	 *            La main contenant les cartes du joueur
 	 */
 	public Joueur(String nom, int comptePoint, Main main) {
-
 		this.nom = nom;
 		this.comptePoint = comptePoint;
 		this.main = main;
-		this.handicapCouleur = null;
 	}
 
 	public String getNom() {
@@ -43,11 +41,11 @@ public abstract class Joueur {
 	public void setComptePoint(int comptePoint) {
 		this.comptePoint = comptePoint;
 	}
-	
+	/*
 	public void appliquerHandicapCouleur(String couleur) {
 		this.handicapCouleur = couleur;
 	}
-
+*/
 
 	public String toString() {
 		return this.nom;
@@ -56,33 +54,32 @@ public abstract class Joueur {
 
 	// fonction qui permet au joueur de récupérer une carte de la pioche.
 
-	public void piocher(Pioche pioche) {
-		this.main.getCartes().add(pioche.prendreCarte());
+	public boolean piocher(Pioche pioche) {
+		if(!pioche.estVide()) {
+			this.main.getCartes().add(pioche.prendreCarte());
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
 	}
 	// peutJouerCarte(), vérifie que le joueur possède au moins une carte qu'il peut
 	// poser sur la pioche (bonne couleur, bonne valeur ou carte spéciale.
 
-	public boolean peutJouerCartes(Carte carte) {
-		LinkedList<Carte> CartePossibleAJouer = new LinkedList<Carte>();
+	public boolean peutJouerCartes(Carte carte, Variante v) {
+		ArrayList<String> cartesAEffet = v.getCartesAEffet() ;
 		for (int i = 0; i < this.main.cartes.size(); i++) {
-			if (carte.getValeur() == this.main.cartes.get(i).getValeur()) {
-				CartePossibleAJouer.add(this.main.cartes.get(i));
-			} else if (carte.getCouleur() == this.main.cartes.get(i).getCouleur()) {
-				CartePossibleAJouer.add(this.main.cartes.get(i));
-			}
+			if ((carte.getValeur() == this.main.cartes.get(i).getValeur())||(carte.getCouleur() == this.main.cartes.get(i).getCouleur())||cartesAEffet.contains(carte.getValeur())) {
+				return true;
+			} 
 		}
-		//Bonne initiative mais on doit pas mettre d'affichage dans les fonctions du moteur de jeu parceque sinon ça posera des problèmes pour l'interface graphique plus tard.
-		return (CartePossibleAJouer.size()==0);
+		return false;
 
 	}
 
 
-
-	// jouerCarte(), pose la carte choisie sur le talon et l'enlève de la main du
-	// joueur.
-	public void jouerCarte(int numeroCarte) {
-		Carte carte = this.main.cartes.get(numeroCarte);
-	}
 	// poserCarte(), pose la carte choisie sur le talon et l'enlève de la main du joueur.
 	public void poserCarte(Carte carte, Talon talon) {
 		this.main.cartes.remove(carte);

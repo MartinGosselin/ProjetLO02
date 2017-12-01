@@ -1,5 +1,7 @@
 package American8;
 
+import java.util.LinkedList;
+
 public class JoueurVirtuel extends Joueur {
 	
 	private Strategie strat;
@@ -15,6 +17,13 @@ public class JoueurVirtuel extends Joueur {
 	public JoueurVirtuel(String nom, int numero, int comptePoint, Main main,Strategie strat) {
 		super(nom, comptePoint, main);
 		this.strat=strat;
+	}
+	public JoueurVirtuel(String nom) {
+		super(nom,0,new Main(new LinkedList<Carte>()));
+	}
+	
+	public void setStrategie(Strategie s) {
+		this.strat=s;
 	}
 
 	

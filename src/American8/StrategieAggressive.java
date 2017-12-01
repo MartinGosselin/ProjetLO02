@@ -41,5 +41,9 @@ public class StrategieAggressive extends Strategie {
 		
 		return cartesJouables;
 	}
+	
+	public String toString() {
+		return "Strategie Aggressive";
+	}
 
 }
