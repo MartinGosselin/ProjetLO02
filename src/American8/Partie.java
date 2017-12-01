@@ -22,7 +22,7 @@ public class Partie {
 		Jeu jeu = Jeu.getInstance();
 
 		System.out.println("Veuillez choisir les paramètres de votre partie : ");
-		//Initialisation des paramètres du joueur
+		// Initialisation des paramètres du joueur
 		System.out.println("Quel est votre nom ? : ");
 		String nomJoueur = reader.next();
 		JoueurReel joueurReel = new JoueurReel(nomJoueur);
@@ -36,7 +36,7 @@ public class Partie {
 		while (!numVarianteValide) {
 			try {
 				numVariante = reader.nextInt() - 1;
-				while (!(numVariante < variantes.size()&& numVariante>=0)) {
+				while (!(numVariante < variantes.size() && numVariante >= 0)) {
 					System.out.println("Veuillez saisir un numéro valide : ");
 					numVariante = reader.nextInt() - 1;
 				}
@@ -68,58 +68,51 @@ public class Partie {
 		listeJoueurVirtuel = Jeu.initJoueurVirtuel(nombreJoueurVirtuel);
 		System.out.println("Vous devez maintenant assigner une stratégie disponible pour chaques joueurs virtuels : ");
 		System.out.println("Les choix possibles sont : ");
-		for(int i =0;i<Strategie.strats.length;i++) {
-			System.out.print("Strategie numero "+(i+1)+" : ");
+		for (int i = 0; i < Strategie.strats.length; i++) {
+			System.out.print("Strategie numero " + (i + 1) + " : ");
 			System.out.println(Strategie.strats[i]);
 		}
-		for(JoueurVirtuel j : listeJoueurVirtuel) {
-			while(!strategieJoueurVirtuelValide) {
+		for (JoueurVirtuel j : listeJoueurVirtuel) {
+			while (!strategieJoueurVirtuelValide) {
 				System.out.println("Quel stratégie voulez vous assigner à : (donner le numéro de la stratégie) ");
 				System.out.println(j);
 				try {
-					numStrategieJoueurVirtuel = reader.nextInt()-1;
-					while(!(numStrategieJoueurVirtuel <Strategie.strats.length && numStrategieJoueurVirtuel >=0)) {
+					numStrategieJoueurVirtuel = reader.nextInt() - 1;
+					while (!(numStrategieJoueurVirtuel < Strategie.strats.length && numStrategieJoueurVirtuel >= 0)) {
 						System.out.println("Veuillez saisir un numero de strategie valide : ");
-						numStrategieJoueurVirtuel=reader.nextInt()-1;
+						numStrategieJoueurVirtuel = reader.nextInt() - 1;
 					}
 					j.setStrategie(Strategie.strats[numStrategieJoueurVirtuel]);
 					strategieJoueurVirtuelValide = true;
-				}
-				catch(InputMismatchException e) {
+				} catch (InputMismatchException e) {
 					System.out.println("Vous devez choisir le NUMERO de la strategie que vous souhaitez attribuer : ");
 					reader = new Scanner(System.in);
 				}
 			}
-			strategieJoueurVirtuelValide=false;
+			strategieJoueurVirtuelValide = false;
 		}
-		
+
 		LinkedList<Joueur> joueurs = new LinkedList<Joueur>();
 		joueurs.add(joueurReel);
 		joueurs.addAll(listeJoueurVirtuel);
 		jeu.setJoueurs(joueurs);
 		jeu.initPioche();
 		jeu.initTalon();
-		
-		System.out.println(jeu.getTalon());
-		
+
 		Joueur distribueur = jeu.choisirDistribueur();
-		System.out.println(distribueur+" distribue les cartes !");
+		System.out.println(distribueur + " distribue les cartes !");
 		jeu.distribuerCartes(distribueur, 8);
 
 		System.out.println("Voici votre main !");
 		System.out.println(joueurReel.getMain());
-		
+
 		System.out.println("La partie va démarrer !");
 		
-		int indexGagnant = jeu.jouer(distribueur);
-		
-		System.out.println(jeu.getJoueurs().get(indexGagnant)+" remporte la partie !");
-		
-		//Cas à gérer
-		//Lorsque le talon commence avec un joker
-		
-		
+		System.out.println("La partie commence avec : "+ jeu.getTalon().getCarteDessus());
 
+		int indexGagnant = jeu.jouer(distribueur);
+
+		System.out.println(jeu.getJoueurs().get(indexGagnant) + " remporte la partie !");
 		reader.close();
 	}
 }

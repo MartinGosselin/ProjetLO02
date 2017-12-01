@@ -70,8 +70,14 @@ public abstract class Joueur {
 
 	public boolean peutJouerCartes(Carte carte, Variante v) {
 		ArrayList<String> cartesAEffet = v.getCartesAEffet() ;
+		boolean aCarteAEffet = false;
+		for (Carte c : this.main.getCartes()) {
+			if(cartesAEffet.contains(c.getValeur())) {
+				aCarteAEffet = true;
+			}
+		}
 		for (int i = 0; i < this.main.cartes.size(); i++) {
-			if ((carte.getValeur() == this.main.cartes.get(i).getValeur())||(carte.getCouleur() == this.main.cartes.get(i).getCouleur())||cartesAEffet.contains(carte.getValeur())) {
+			if (carte.getValeur() == this.main.cartes.get(i).getValeur() || carte.getCouleur() == this.main.cartes.get(i).getCouleur()||aCarteAEffet) {
 				return true;
 			} 
 		}

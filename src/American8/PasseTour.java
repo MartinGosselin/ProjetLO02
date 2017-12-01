@@ -8,7 +8,12 @@ public class PasseTour extends EffetCarte {
 	 * @param j le joueur qui joue la carte
 	 */
 	public int appliquerEffet(Jeu jeu,Joueur j) {
-		return jeu.getJoueurs().indexOf(j)+1;
+		int indexProchainJoueur = jeu.getJoueurs().indexOf(j)+1;
+		if(indexProchainJoueur>=jeu.getJoueurs().size()) {
+			indexProchainJoueur = 0;
+		}
+		System.out.println(jeu.getJoueurs().get(indexProchainJoueur)+" passe son tour !");
+		return indexProchainJoueur;
 	}
 
 }

@@ -138,8 +138,8 @@ public class Jeu {
 					this.pioche.getCartes().add(new Carte(couleur, valeur));
 				}
 			}
-			this.pioche.getCartes().add(new Carte("Joker", "Carreau"));
-			this.pioche.getCartes().add(new Carte("Joker", "Pique"));
+			this.pioche.getCartes().add(new Carte("Carreau","Joker" ));
+			this.pioche.getCartes().add(new Carte("Pique", "Joker"));
 
 		}
 		this.pioche.melanger();
@@ -174,6 +174,7 @@ public class Jeu {
 				piocheVide = !this.joueurs.get(compteur).piocher(this.pioche);
 				if (piocheVide) {
 					this.setPioche(new Pioche(this.talon.retournerTalon()));
+					this.talon.addCarte(this.pioche.prendreCarte());
 					this.joueurs.get(compteur).piocher(this.pioche);
 				}
 			}
@@ -218,6 +219,7 @@ public class Jeu {
 				System.out.println(this.joueurs.get(compteur)+" ne pouvait pas poser de carte ! Il pioche !");
 				if(piocheVide) {
 					this.pioche = new Pioche(this.talon.retournerTalon());
+					this.talon.addCarte(this.pioche.prendreCarte());
 					this.joueurs.get(compteur).piocher(this.pioche);
 				}
 			}
