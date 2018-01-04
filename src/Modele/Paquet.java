@@ -20,28 +20,6 @@ public abstract class Paquet {
 	public Paquet() {
 		this.cartes = new LinkedList<Carte>();
 	}
-	/*
-	public static ArrayList<String> getDifferentesValeurs(int nbCartePaquet) {
-		ArrayList<String> valeurs = new ArrayList<String>();
-		switch (nbCartePaquet) {
-		case 52:
-			for (String valeur : Carte.VALEURS) {
-				valeurs.add(valeur);
-			}
-		case 32 :
-			for(int i=7;i<14;i++) {
-				valeurs.add(Carte.VALEURS[i]);
-			}
-			
-		case 54:
-			for (String valeur : Carte.VALEURS) {
-				valeurs.add(valeur);
-			}
-			valeurs.add("Joker");
-		}
-		return valeurs;
-	}
-	*/
 	/**
 	 * Méthode qui permet de vérifier si le paquet est vide
 	 * 

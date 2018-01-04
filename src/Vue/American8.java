@@ -83,8 +83,8 @@ public class American8 {
 		JLabel labelNbJoueur = new JLabel("Nombre de joueurs");
 		boxParametre.add(labelNbJoueur);
 		
-		JFormattedTextField textNbJoueurs = new JFormattedTextField();
-		boxParametre.add(textNbJoueurs);
+		JSpinner selectNbJoueurs = new JSpinner();
+		boxParametre.add(selectNbJoueurs);
 		
 		JButton boutonValiderJoueurs = new JButton("Valider le nombre de joueurs");
 		boxParametre.add(boutonValiderJoueurs);

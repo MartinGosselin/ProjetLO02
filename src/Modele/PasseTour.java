@@ -12,7 +12,7 @@ public class PasseTour extends EffetCarte {
 		if(indexProchainJoueur>=jeu.getJoueurs().size()) {
 			indexProchainJoueur = 0;
 		}
-		System.out.println(jeu.getJoueurs().get(indexProchainJoueur)+" passe son tour !");
+		jeu.passeTour(j,jeu.getJoueurs().get(indexProchainJoueur));
 		return indexProchainJoueur;
 	}
 

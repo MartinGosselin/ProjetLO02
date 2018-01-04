@@ -7,9 +7,6 @@ public class ChangerCouleur extends EffetCarte {
 	public int appliquerEffet(Jeu jeu,Joueur j) {
 		
 		int index = jeu.getJoueurs().indexOf(j);
-		/*
-		jeu.getJoueurs().get(index+1).appliquerHandicapCouleur(couleur));
-		*/
 		return index;
 	}
 

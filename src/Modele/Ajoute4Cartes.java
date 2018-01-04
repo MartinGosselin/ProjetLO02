@@ -8,10 +8,7 @@ public class Ajoute4Cartes extends EffetCarte {
 			indexCible = 0;
 		}
 		
-		for (int i = 0; i < 4; i++) {
-			jeu.getJoueurs().get(indexCible).piocher(jeu.getPioche());
-		}
-		System.out.println(j + " fait piocher 4 cartes au joueur suivant");
+		jeu.piocherCartes(j,jeu.getJoueurs().get(indexCible),4);
 		return jeu.getJoueurs().indexOf(j);
 	}
 

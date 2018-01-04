@@ -2,11 +2,13 @@ package Modele;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Observable;
 import java.util.Random;
 
-public class Jeu {
+import Controller.ControllerAmerican8;
+
+public class Jeu extends Observable{
 
 	private static Jeu jeu;
 	private Pioche pioche;
@@ -29,6 +31,7 @@ public class Jeu {
 		this.talon = talon;
 		this.joueurs = joueurs;
 		this.variante = null;
+		this.addObserver(new ControllerAmerican8());
 	}
 
 	/**
@@ -88,6 +91,15 @@ public class Jeu {
 	public Talon getTalon() {
 		return this.talon;
 	}
+	
+	
+	public void piocherCartes(Joueur j,Joueur cible,int nbCartes) {
+		for(int i=0;i<nbCartes;i++) {
+			cible.piocher(this.pioche);
+		}
+		System.out.println(j + " fait piocher "+nbCartes+" cartes à "+cible);
+		this.lancerPiocherEvent(cible,nbCartes);
+	}
 
 	/**
 	 * méthode qui détermine aléatoirement un joueur et qui le désigne comme
@@ -109,7 +121,14 @@ public class Jeu {
 	 */
 	public int inverserSensJeu(Joueur j) {
 		Collections.reverse(this.joueurs);
+		System.out.println("Et on change de sens !");
+		this.lancerChangerSensEvent();
 		return this.joueurs.indexOf(j);
+	}
+	
+	public void passeTour(Joueur j,Joueur cible) {
+		this.lancerPasseTourEvent(j,cible);
+		System.out.println(j +"fait passer son tour à "+cible+"!");
 	}
 
 	/**
@@ -212,15 +231,19 @@ public class Jeu {
 				this.joueurs.get(compteur).poserCarte(
 						this.joueurs.get(compteur).choisirCarteAJouer(this.variante, this.talon.getCarteDessus()),
 						this.talon);
+				this.lancerPoserCarteEvent(j,this.talon.getCarteDessus());
 				System.out.println(this.joueurs.get(compteur)+" pose un "+this.talon.getCarteDessus());
 				compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
 			} else {
 				piocheVide = !this.joueurs.get(compteur).piocher(this.pioche);
+				this.lancerPiocherEvent(this.joueurs.get(compteur),1);
 				System.out.println(this.joueurs.get(compteur)+" ne pouvait pas poser de carte ! Il pioche !");
 				if(piocheVide) {
 					this.pioche = new Pioche(this.talon.retournerTalon());
+					this.lancerPiocheVideEvent();
 					this.talon.addCarte(this.pioche.prendreCarte());
 					this.joueurs.get(compteur).piocher(this.pioche);
+					this.lancerPiocherEvent(this.joueurs.get(compteur),1);
 				}
 			}
 			try {
@@ -229,11 +252,41 @@ public class Jeu {
 			catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
-			
-
 		}
+		this.lancerPartieTermineEvent(this.getJoueurs().get(compteur));
+		
 		return compteur;
 
+	}
+	
+	public void lancerChangerSensEvent() {
+		this.setChanged();
+		this.notifyObservers(new EventChangerSens(this));
+	}
+	
+	public void lancerPasseTourEvent(Joueur joueur,Joueur cible) {
+		this.setChanged();
+		this.notifyObservers(new EventPasseTour(this,joueur,cible));
+	}
+	
+	public void lancerPartieTermineEvent(Joueur j) {
+		this.setChanged();
+		this.notifyObservers(new EventPartieTermine(this,j));
+	}
+	
+	public void lancerPiocheVideEvent() {
+		this.setChanged();
+		this.notifyObservers(new EventPiocheVide(this));
+	}
+	
+	public void lancerPiocherEvent(Joueur j,int nbCarte) {
+		this.setChanged();
+		this.notifyObservers(new EventPiocher(this,j,nbCarte));
+	}
+	
+	public void lancerPoserCarteEvent(Joueur j,Carte carte) {
+		this.setChanged();
+		this.notifyObservers(new EventPoserCarte(this,j,carte));
 	}
 
 	public boolean estTermine() {
