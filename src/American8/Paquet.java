@@ -20,7 +20,7 @@ public abstract class Paquet {
 	public Paquet() {
 		this.cartes = new LinkedList<Carte>();
 	}
-	
+	/*
 	public static ArrayList<String> getDifferentesValeurs(int nbCartePaquet) {
 		ArrayList<String> valeurs = new ArrayList<String>();
 		switch (nbCartePaquet) {
@@ -41,7 +41,7 @@ public abstract class Paquet {
 		}
 		return valeurs;
 	}
-
+	*/
 	/**
 	 * Méthode qui permet de vérifier si le paquet est vide
 	 * 
