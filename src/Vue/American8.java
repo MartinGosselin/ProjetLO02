@@ -17,6 +17,9 @@ import java.awt.List;
 import javax.swing.JFormattedTextField;
 import java.awt.Component;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerAmerican8;
+
 import java.awt.Panel;
 import javax.swing.JSeparator;
 import java.awt.Canvas;
@@ -25,6 +28,7 @@ import java.awt.Color;
 public class American8 {
 
 	private JFrame frame;
+	public ControllerAmerican8 controller;
 
 	/**
 	 * Launch the application.
@@ -47,6 +51,7 @@ public class American8 {
 	 */
 	public American8() {
 		initialize();
+		//this.controller=new ControllerAmerican8(this);
 	}
 
 	/**

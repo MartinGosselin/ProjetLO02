@@ -50,6 +50,14 @@ public class Variante {
 	public String getDescription() {
 		return this.description;
 	}
+	
+	public static ArrayList<Variante> getAllVariantes() {
+		ArrayList<Variante> variantes = new ArrayList<Variante>();
+		variantes.add(Variante.initVariante1());
+		variantes.add(Variante.initVariante2());
+		return variantes;
+
+	}
 
 	public static Variante initVariante1() {
 		HashMap<String, EffetCarte> effetsCartes = new HashMap<String, EffetCarte>();

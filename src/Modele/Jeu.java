@@ -31,7 +31,6 @@ public class Jeu extends Observable{
 		this.talon = talon;
 		this.joueurs = joueurs;
 		this.variante = null;
-		this.addObserver(new ControllerAmerican8());
 	}
 
 	/**
@@ -91,6 +90,22 @@ public class Jeu extends Observable{
 	public Talon getTalon() {
 		return this.talon;
 	}
+	
+	public void initObserver(ControllerAmerican8 controller) {
+		this.addObserver(controller);
+	}
+	
+	public void initJeu(JoueurReel joueur,ArrayList<JoueurVirtuel> virtuels,Variante variante) {
+		this.variante=variante;
+		this.joueurs.addAll(virtuels);
+		this.joueurs.add(joueur);
+		this.initPioche();
+		this.initTalon();
+		this.choisirDistribueur();
+	}
+	
+	
+	
 	
 	
 	public void piocherCartes(Joueur j,Joueur cible,int nbCartes) {
