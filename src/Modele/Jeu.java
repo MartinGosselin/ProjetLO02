@@ -106,7 +106,10 @@ public class Jeu extends Observable{
 	
 	
 	
-	
+	public void rejouer(Joueur j) {
+		System.out.println(j+" rejoue !");
+		this.lancerRejouerEvent(j);
+	}
 	
 	public void piocherCartes(Joueur j,Joueur cible,int nbCartes) {
 		for(int i=0;i<nbCartes;i++) {
@@ -272,6 +275,11 @@ public class Jeu extends Observable{
 		
 		return compteur;
 
+	}
+	
+	public void lancerRejouerEvent(Joueur j) {
+		this.setChanged();
+		this.notifyObservers(new EventRejouer(this,j));
 	}
 	
 	public void lancerChangerSensEvent() {

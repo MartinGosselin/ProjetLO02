@@ -46,16 +46,30 @@ public class Variante {
 	public EffetCarte getEffetCarte(String valeur) {
 		return this.effetsCartes.get(valeur);
 	}
-	
+
 	public String getDescription() {
 		return this.description;
 	}
-	
+
 	public static ArrayList<Variante> getAllVariantes() {
 		ArrayList<Variante> variantes = new ArrayList<Variante>();
 		variantes.add(Variante.initVariante1());
 		variantes.add(Variante.initVariante2());
 		return variantes;
+
+	}
+
+	public String getNomVariante() {
+		return this.nomVariante;
+	}
+
+	public static String[] getAllVariantesNames() {
+		ArrayList<Variante> variantes = Variante.getAllVariantes();
+		String[] names = new String[variantes.size()];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = variantes.get(i).getNomVariante();
+		}
+		return names;
 
 	}
 
@@ -77,14 +91,14 @@ public class Variante {
 		effetsCartes.put("Joker", new Ajoute4Cartes());
 
 		try {
-			return new Variante(54, "Classique", effetsCartes,"Variante Classique du 8 américain, Le 2 fait piocher 2 cartes, le 8 change la couleur, le Valet passe le tour, l'As change le sens et le Joker ajoute 4 cartes.");
+			return new Variante(54, "Classique", effetsCartes,
+					"Variante Classique du 8 américain, Le 2 fait piocher 2 cartes, le 8 change la couleur, le Valet passe le tour, l'As change le sens et le Joker ajoute 4 cartes.");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
 	}
-	
-	
+
 	public static Variante initVariante2() {
 		HashMap<String, EffetCarte> effetsCartes = new HashMap<String, EffetCarte>();
 		effetsCartes.put("2", new AucunEffet());
@@ -101,9 +115,10 @@ public class Variante {
 		effetsCartes.put("Roi", new AucunEffet());
 		effetsCartes.put("As", new Ajoute4Cartes());
 		effetsCartes.put("Joker", new AucunEffet());
-		
+
 		try {
-			return new Variante(52, "Monclar", effetsCartes,"Variante Monclar du 8 américain,le 7 passe le tour, le 8 change la couleur,le 9 ajoute 2 cartes, le Valet change le sens, l'As ajoute 4 cartes.");
+			return new Variante(52, "Monclar", effetsCartes,
+					"Variante Monclar du 8 américain,le 7 passe le tour, le 8 change la couleur,le 9 ajoute 2 cartes, le Valet change le sens, l'As ajoute 4 cartes.");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
