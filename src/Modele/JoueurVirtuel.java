@@ -22,6 +22,11 @@ public class JoueurVirtuel extends Joueur {
 		super(nom,0,new Main(new LinkedList<Carte>()));
 	}
 	
+	public JoueurVirtuel(String nom,Strategie strat) {
+		super(nom,0,new Main(new LinkedList<Carte>()));
+		this.strat=strat;
+	}
+	
 	public void setStrategie(Strategie s) {
 		this.strat=s;
 	}

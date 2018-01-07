@@ -16,6 +16,24 @@ public abstract class Strategie {
 	
 	public abstract LinkedList<Carte> getCartesJouable(Variante v,LinkedList<Carte> cartes, Carte carte);
 	
+	public static ArrayList<String> getStrategieNames(){
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Passive");
+		names.add("Aggresive");
+		return names;
+	}
+	
+	public static Strategie getStrategieByName(String name) {
+		Strategie strat =null;
+		switch(name) {
+		case "Passive" :
+			strat = new StrategiePassive();
+ 		case "Aggresive" :
+ 			strat = new StrategieAggressive();
+		}
+		return strat;
+	}
+	
 	
 
 }

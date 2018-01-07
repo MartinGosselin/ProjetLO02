@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.Box;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
@@ -29,12 +30,15 @@ import java.util.HashMap;
 import javax.swing.JSeparator;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class American8 {
 
 	private JFrame frame;
 	public ControllerAmerican8 controller;
 	private HashMap<String, Component> componentsMap;
+	private int nbJoueursVirtuels;
 
 	/**
 	 * Launch the application.
@@ -50,6 +54,14 @@ public class American8 {
 				}
 			}
 		});
+	}
+	
+	public int getNbJoueursVirtuels() {
+		return this.nbJoueursVirtuels;
+	}
+	
+	public void setNbJoueursVirtuels(int nbJoueursVirtuels) {
+		this.nbJoueursVirtuels = nbJoueursVirtuels;
 	}
 
 	/**
@@ -105,8 +117,9 @@ public class American8 {
 		frame.getContentPane().setLayout(null);
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setDividerSize(2);
 		splitPane.setName("splitPane");
-		splitPane.setBounds(0, 0, 776, 553);
+		splitPane.setBounds(0, 0, 776, 501);
 		frame.getContentPane().add(splitPane);
 
 		Panel panelParametre = new Panel();
@@ -125,7 +138,7 @@ public class American8 {
 		labelPseudo.setName("labelPseudo");
 		pseudoBox.add(labelPseudo);
 
-		JFormattedTextField textPseudo = new JFormattedTextField();
+		JTextField textPseudo = new JFormattedTextField();
 		textPseudo.setName("textPseudo");
 		pseudoBox.add(textPseudo);
 
@@ -149,7 +162,8 @@ public class American8 {
 		labelNbJoueur.setName("labelNbJoueur");
 		nbJoueurBox.add(labelNbJoueur);
 
-		JSpinner selectNbJoueurs = new JSpinner();
+		SpinnerNumberModel modeleNbJoueurs = new SpinnerNumberModel(1,1,5,1);
+		JSpinner selectNbJoueurs = new JSpinner(modeleNbJoueurs);
 		selectNbJoueurs.setName("selectNbJoueurs");
 		nbJoueurBox.add(selectNbJoueurs);
 
@@ -161,38 +175,6 @@ public class American8 {
 		stratJoueursBox.setName("stratJoueursBox");
 		boxParametre.add(stratJoueursBox);
 
-		Box boxStratJ1 = Box.createHorizontalBox();
-		boxStratJ1.setName("boxStratJ1");
-		stratJoueursBox.add(boxStratJ1);
-
-		JLabel labelJ1 = new JLabel("New label");
-		labelJ1.setName("labelJ1");
-		boxStratJ1.add(labelJ1);
-
-		JSpinner choixStratJ1 = new JSpinner();
-		choixStratJ1.setName("choixStratJ1");
-		boxStratJ1.add(choixStratJ1);
-
-		Box boxStratJ2 = Box.createHorizontalBox();
-		boxStratJ2.setName("boxStratJ2");
-		stratJoueursBox.add(boxStratJ2);
-
-		JLabel labelJ2 = new JLabel("New label");
-		labelJ2.setName("labelJ2");
-		boxStratJ2.add(labelJ2);
-
-		JSpinner choixStratJ2 = new JSpinner();
-		boxStratJ2.add(choixStratJ2);
-
-		Box boxStratJ3 = Box.createHorizontalBox();
-		stratJoueursBox.add(boxStratJ3);
-
-		JLabel labelJ3 = new JLabel("New label");
-		boxStratJ3.add(labelJ3);
-
-		JSpinner choixStratJ3 = new JSpinner();
-		boxStratJ3.add(choixStratJ3);
-
 		JButton btnCommencerLaPartie = new JButton("Commencer la partie");
 		btnCommencerLaPartie.setName("btnCommencerLaPartie");
 		boxParametre.add(btnCommencerLaPartie);
@@ -203,26 +185,17 @@ public class American8 {
 		panelJeu.setLayout(null);
 
 		Box boxJeu = Box.createVerticalBox();
+		boxJeu.setBounds(46, 5, 475, 43);
 		boxJeu.setName("boxJeu");
-		boxJeu.setBounds(46, 5, 475, 14);
 		panelJeu.add(boxJeu);
 
 		Box boxJoueurs = Box.createHorizontalBox();
 		boxJoueurs.setName("boxJoueurs");
 		boxJeu.add(boxJoueurs);
 
-		JLabel labelNBCarteJ1 = new JLabel("J1 2 Cartes");
-		boxJoueurs.add(labelNBCarteJ1);
-
-		JLabel labelNbCarteJ2 = new JLabel("J2 6 Cartes");
-		boxJoueurs.add(labelNbCarteJ2);
-
-		JLabel labelNbCarteJ3 = new JLabel("J3 4 Cartes");
-		boxJoueurs.add(labelNbCarteJ3);
-
 		Box boxTerrainJeu = Box.createHorizontalBox();
+		boxTerrainJeu.setBounds(46, 59, 475, 296);
 		boxTerrainJeu.setName("boxTerrainJeu");
-		boxTerrainJeu.setBounds(46, 30, 475, 325);
 		panelJeu.add(boxTerrainJeu);
 
 		Canvas canvasTerrainJeu = new Canvas();
@@ -231,13 +204,23 @@ public class American8 {
 		boxTerrainJeu.add(canvasTerrainJeu);
 
 		Box boxCartesJoueur = Box.createHorizontalBox();
+		boxCartesJoueur.setBounds(108, 444, 413, -54);
 		boxCartesJoueur.setName("boxCartesJoueur");
-		boxCartesJoueur.setBounds(46, 444, 475, -54);
 		panelJeu.add(boxCartesJoueur);
-
+		
+		/*
 		Canvas canvasCartesJoueur = new Canvas();
 		canvasCartesJoueur.setName("canvasCartesJoueur");
 		canvasCartesJoueur.setForeground(Color.GREEN);
 		boxCartesJoueur.add(canvasCartesJoueur);
+		*/
+		JLabel infoLabel = new JLabel("Info");
+		infoLabel.setName("infoLabel");
+		boxCartesJoueur.add(infoLabel);
+		
+	}
+
+	public JFrame getFrame() {
+		return this.frame;
 	}
 }

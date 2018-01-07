@@ -11,6 +11,7 @@ public class Variante {
 	private String nomVariante;
 	private HashMap<String, EffetCarte> effetsCartes;
 	private String description;
+	private final int nbCartesMain =8;
 
 	/**
 	 * 
@@ -37,6 +38,10 @@ public class Variante {
 
 	public Variante() {
 		this.nomVariante = "Defaut";
+	}
+	
+	public int getNbCartesMain() {
+		return this.nbCartesMain;
 	}
 
 	public int getNbCartePaquet() {
@@ -71,6 +76,17 @@ public class Variante {
 		}
 		return names;
 
+	}
+	
+	public static Variante getVarianteByName(String name) {
+		Variante variante = null;
+		switch(name) {
+		case "Classique" :
+			variante = Variante.initVariante1();
+		case "Monclar" :
+			variante = Variante.initVariante2();
+		}
+		return variante;
 	}
 
 	public static Variante initVariante1() {

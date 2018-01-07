@@ -16,6 +16,7 @@ public class Jeu extends Observable{
 	private LinkedList<Joueur> joueurs;
 	private Variante variante;
 
+
 	/**
 	 * Constructeur de la classe Jeu
 	 * 
@@ -53,6 +54,14 @@ public class Jeu extends Observable{
 			Jeu.jeu = new Jeu();
 		}
 		return Jeu.jeu;
+	}
+	
+	public String getNameJoueurByIndex(int i) {
+		return this.joueurs.get(i).getNom();
+	}
+	
+	public int getNombreCartesJoueurByIndex(int i) {
+		return this.joueurs.get(i).getMain().getCartes().size();
 	}
 
 	public Pioche getPioche() {
@@ -101,7 +110,13 @@ public class Jeu extends Observable{
 		this.joueurs.add(joueur);
 		this.initPioche();
 		this.initTalon();
-		this.choisirDistribueur();
+		
+	}
+	
+	public void startJeu() {
+		Joueur distribueur = this.choisirDistribueur();
+		this.distribuerCartes(distribueur,this.variante.getNbCartesMain());
+		this.jouer(distribueur);
 	}
 	
 	
