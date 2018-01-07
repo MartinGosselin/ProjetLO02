@@ -114,6 +114,7 @@ public class American8 {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setName("frame");
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.getContentPane().setLayout(null);
 
 		JSplitPane splitPane = new JSplitPane();
@@ -152,6 +153,7 @@ public class American8 {
 
 		JList listVariante = new JList();
 		listVariante.setName("listVariante");
+		listVariante.setFixedCellWidth(75);
 		varianteBox.add(listVariante);
 
 		Box nbJoueurBox = Box.createVerticalBox();

@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Component;
 import java.awt.Label;
+import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
@@ -129,7 +131,9 @@ public class ControllerAmerican8 implements Observer, Runnable {
 			labelNbCarte.setName("NbCarteJoueur"+(i+1));
 			boxJoueur.add(labelNbCarte);
 		}
-		SwingUtilities.updateComponentTreeUI(ControllerAmerican8.this.vue.getFrame());
+		Panel panelJeu = (Panel) this.vue.getComponentByName("panelJeu");
+		panelJeu.repaint();
+		
 		
 	}
 
@@ -137,7 +141,6 @@ public class ControllerAmerican8 implements Observer, Runnable {
 	public void update(Observable arg0, Object arg1) {
 		System.out.println("test");
 		JLabel label = (JLabel) this.vue.getComponentByName("infoLabel");
-		label.setText("info label");
 		SwingUtilities.updateComponentTreeUI(ControllerAmerican8.this.vue.getFrame());
 	}
 
