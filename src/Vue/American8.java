@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -32,6 +33,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class American8 {
 
@@ -55,11 +58,11 @@ public class American8 {
 			}
 		});
 	}
-	
+
 	public int getNbJoueursVirtuels() {
 		return this.nbJoueursVirtuels;
 	}
-	
+
 	public void setNbJoueursVirtuels(int nbJoueursVirtuels) {
 		this.nbJoueursVirtuels = nbJoueursVirtuels;
 	}
@@ -164,7 +167,7 @@ public class American8 {
 		labelNbJoueur.setName("labelNbJoueur");
 		nbJoueurBox.add(labelNbJoueur);
 
-		SpinnerNumberModel modeleNbJoueurs = new SpinnerNumberModel(1,1,5,1);
+		SpinnerNumberModel modeleNbJoueurs = new SpinnerNumberModel(1, 1, 5, 1);
 		JSpinner selectNbJoueurs = new JSpinner(modeleNbJoueurs);
 		selectNbJoueurs.setName("selectNbJoueurs");
 		nbJoueurBox.add(selectNbJoueurs);
@@ -187,7 +190,7 @@ public class American8 {
 		panelJeu.setLayout(null);
 
 		Box boxJeu = Box.createVerticalBox();
-		boxJeu.setBounds(46, 5, 475, 43);
+		boxJeu.setBounds(46, 5, 475, 54);
 		boxJeu.setName("boxJeu");
 		panelJeu.add(boxJeu);
 
@@ -195,31 +198,33 @@ public class American8 {
 		boxJoueurs.setName("boxJoueurs");
 		boxJeu.add(boxJoueurs);
 
-		Box boxTerrainJeu = Box.createHorizontalBox();
-		boxTerrainJeu.setBounds(46, 59, 475, 296);
-		boxTerrainJeu.setName("boxTerrainJeu");
-		panelJeu.add(boxTerrainJeu);
+		JPanel panel = new JPanel();
+		panel.setBounds(46, 70, 475, 308);
+		panelJeu.add(panel);
+		panel.setLayout(null);
 
-		Canvas canvasTerrainJeu = new Canvas();
-		canvasTerrainJeu.setName("canvasTerrainJeu");
-		canvasTerrainJeu.setForeground(Color.GREEN);
-		boxTerrainJeu.add(canvasTerrainJeu);
+		JLabel labelPioche = new JLabel();
+		labelPioche.setName("labelPioche");
+		labelPioche.setBounds(20, 21, 181, 257);
+		panel.add(labelPioche);
+
+		JLabel labelTalon = new JLabel();
+		labelTalon.setName("labelTalon");
+		labelTalon.setBounds(268, 21, 197, 257);
+		panel.add(labelTalon);
 
 		Box boxCartesJoueur = Box.createHorizontalBox();
 		boxCartesJoueur.setBounds(108, 444, 413, -54);
 		boxCartesJoueur.setName("boxCartesJoueur");
 		panelJeu.add(boxCartesJoueur);
-		
+
 		/*
-		Canvas canvasCartesJoueur = new Canvas();
-		canvasCartesJoueur.setName("canvasCartesJoueur");
-		canvasCartesJoueur.setForeground(Color.GREEN);
-		boxCartesJoueur.add(canvasCartesJoueur);
-		*/
-		JLabel infoLabel = new JLabel("Info");
-		infoLabel.setName("infoLabel");
-		boxCartesJoueur.add(infoLabel);
-		
+		 * Canvas canvasCartesJoueur = new Canvas();
+		 * canvasCartesJoueur.setName("canvasCartesJoueur");
+		 * canvasCartesJoueur.setForeground(Color.GREEN);
+		 * boxCartesJoueur.add(canvasCartesJoueur);
+		 */
+
 	}
 
 	public JFrame getFrame() {

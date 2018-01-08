@@ -10,6 +10,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -35,6 +36,12 @@ public class ControllerAmerican8 implements Observer, Runnable {
 	public American8 vue;
 	public Jeu jeu;
 	public Thread thread;
+	
+	/*
+	 * ImageIcon icon= new ImageIcon("AsCarreau.png");
+			//208-303
+			JLabel labelTest = new JLabel(icon);
+	 */
 
 	public ControllerAmerican8(American8 vue) {
 		this.vue = vue;
@@ -99,6 +106,14 @@ public class ControllerAmerican8 implements Observer, Runnable {
 						.getComponentByName("boutonValiderJoueurs");
 				boutonValiderJoueurs.setEnabled(false);
 				ControllerAmerican8.this.affichageLabelNbCartes();
+				
+				JLabel labelPioche = (JLabel) ControllerAmerican8.this.vue.getComponentByName("labelPioche");
+				ImageIcon dos = new ImageIcon("Dos.png");
+				labelPioche.setIcon(dos);
+				
+				JLabel labelTalon = (JLabel) ControllerAmerican8.this.vue.getComponentByName("labelTalon");
+				ImageIcon carte = ControllerAmerican8.this.jeu.getTalon().getCarteDessus().getImageIcon();
+				labelTalon.setIcon(carte);
 
 			}
 		});
@@ -130,6 +145,9 @@ public class ControllerAmerican8 implements Observer, Runnable {
 			JLabel labelNbCarte = new JLabel(""+this.jeu.getNombreCartesJoueurByIndex(i)+" cartes");
 			labelNbCarte.setName("NbCarteJoueur"+(i+1));
 			boxJoueur.add(labelNbCarte);
+			
+			
+			
 		}
 		Panel panelJeu = (Panel) this.vue.getComponentByName("panelJeu");
 		panelJeu.repaint();
