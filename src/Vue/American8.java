@@ -75,6 +75,10 @@ public class American8 {
 		this.createComponentMap();
 		this.controller = new ControllerAmerican8(this);
 	}
+	
+	public JFrame getFrame() {
+		return this.frame;
+	}
 
 	private void createComponentMap() {
 		this.componentsMap = new HashMap<String, Component>();
@@ -199,35 +203,30 @@ public class American8 {
 		boxJeu.add(boxJoueurs);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(46, 70, 475, 308);
+		panel.setBounds(84, 70, 406, 291);
 		panelJeu.add(panel);
 		panel.setLayout(null);
 
 		JLabel labelPioche = new JLabel();
 		labelPioche.setName("labelPioche");
-		labelPioche.setBounds(20, 21, 181, 257);
+		labelPioche.setBounds(0, 0, 193, 291);
 		panel.add(labelPioche);
 
 		JLabel labelTalon = new JLabel();
-		labelTalon.setName("labelTalon");
-		labelTalon.setBounds(268, 21, 197, 257);
+		labelTalon.setBounds(207, 0, 196, 291);
 		panel.add(labelTalon);
+		labelTalon.setName("labelTalon");
 
 		Box boxCartesJoueur = Box.createHorizontalBox();
 		boxCartesJoueur.setBounds(108, 444, 413, -54);
 		boxCartesJoueur.setName("boxCartesJoueur");
 		panelJeu.add(boxCartesJoueur);
 
-		/*
-		 * Canvas canvasCartesJoueur = new Canvas();
-		 * canvasCartesJoueur.setName("canvasCartesJoueur");
-		 * canvasCartesJoueur.setForeground(Color.GREEN);
-		 * boxCartesJoueur.add(canvasCartesJoueur);
-		 */
+		JList<JLabel> listCartesJoueur = new JList<JLabel>();
+		listCartesJoueur.setName("listCartesJoueur");
+		boxCartesJoueur.add(listCartesJoueur);
 
 	}
 
-	public JFrame getFrame() {
-		return this.frame;
-	}
+	
 }

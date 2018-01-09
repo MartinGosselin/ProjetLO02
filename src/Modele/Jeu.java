@@ -201,6 +201,15 @@ public class Jeu extends Observable{
 	public void initTalon() {
 		this.talon.addCarte(this.pioche.prendreCarte());
 	}
+	
+	public JoueurReel getJoueurReel() {
+		for(Joueur j:this.joueurs) {
+			if(j instanceof JoueurReel) {
+				return (JoueurReel) j;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Distribue les nbCartes cartes de la pioche entre les différents joueurs à

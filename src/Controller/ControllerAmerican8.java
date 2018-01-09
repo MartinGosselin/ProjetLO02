@@ -1,11 +1,13 @@
 package Controller;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,6 +26,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import Modele.Carte;
+import Modele.EventPoserCarte;
 import Modele.Jeu;
 import Modele.JoueurReel;
 import Modele.JoueurVirtuel;
@@ -36,11 +40,10 @@ public class ControllerAmerican8 implements Observer, Runnable {
 	public American8 vue;
 	public Jeu jeu;
 	public Thread thread;
-	
+
 	/*
-	 * ImageIcon icon= new ImageIcon("AsCarreau.png");
-			//208-303
-			JLabel labelTest = new JLabel(icon);
+	 * ImageIcon icon= new ImageIcon("AsCarreau.png"); //208-303 JLabel labelTest =
+	 * new JLabel(icon);
 	 */
 
 	public ControllerAmerican8(American8 vue) {
@@ -87,7 +90,8 @@ public class ControllerAmerican8 implements Observer, Runnable {
 			public void mouseClicked(MouseEvent e) {
 				JTextField pseudoTextField = (JTextField) ControllerAmerican8.this.vue.getComponentByName("textPseudo");
 				String pseudo = (String) pseudoTextField.getText();
-				JList<String> listVariantes = (JList<String>) ControllerAmerican8.this.vue.getComponentByName("listVariante");
+				JList<String> listVariantes = (JList<String>) ControllerAmerican8.this.vue
+						.getComponentByName("listVariante");
 				String variante = (String) listVariantes.getSelectedValue();
 				ArrayList<String> stratJoueurs = new ArrayList<String>();
 				for (int i = 1; i <= ControllerAmerican8.this.vue.getNbJoueursVirtuels(); i++) {
@@ -105,15 +109,17 @@ public class ControllerAmerican8 implements Observer, Runnable {
 				JButton boutonValiderJoueurs = (JButton) ControllerAmerican8.this.vue
 						.getComponentByName("boutonValiderJoueurs");
 				boutonValiderJoueurs.setEnabled(false);
-				ControllerAmerican8.this.affichageLabelNbCartes();
-				
+				ControllerAmerican8.this.updateAffichageLabelNbCartes();
+
 				JLabel labelPioche = (JLabel) ControllerAmerican8.this.vue.getComponentByName("labelPioche");
 				ImageIcon dos = new ImageIcon("Dos.png");
-				labelPioche.setIcon(dos);
-				
-				JLabel labelTalon = (JLabel) ControllerAmerican8.this.vue.getComponentByName("labelTalon");
-				ImageIcon carte = ControllerAmerican8.this.jeu.getTalon().getCarteDessus().getImageIcon();
-				labelTalon.setIcon(carte);
+				Image dosRescaled = dos.getImage().getScaledInstance(labelPioche.getWidth(), labelPioche.getHeight(),
+						Image.SCALE_DEFAULT);
+				ImageIcon imageIcon = new ImageIcon(dosRescaled);
+				labelPioche.setIcon(imageIcon);
+
+				ControllerAmerican8.this.updateAffichageTalon();
+				ControllerAmerican8.this.updateAffichageCartesJoueurReel();
 
 			}
 		});
@@ -126,39 +132,64 @@ public class ControllerAmerican8 implements Observer, Runnable {
 		JoueurReel joueur = new JoueurReel(nomJoueur);
 		ArrayList<JoueurVirtuel> joueursVirtuels = new ArrayList<JoueurVirtuel>();
 		for (int i = 0; i < this.vue.getNbJoueursVirtuels(); i++) {
-			joueursVirtuels.add(new JoueurVirtuel("Joueur" + (i+1), Strategie.getStrategieByName(strats.get(i))));
+			joueursVirtuels.add(new JoueurVirtuel("Joueur" + (i + 1), Strategie.getStrategieByName(strats.get(i))));
 		}
 		Variante variante = Variante.getVarianteByName(varianteName);
 		this.jeu.initJeu(joueur, joueursVirtuels, variante);
 	}
-	
-	public void affichageLabelNbCartes() {
+
+	public void updateAffichageLabelNbCartes() {
 		Box boxNbCartesJoueurs = (Box) this.vue.getComponentByName("boxJoueurs");
-		for(int i=0;i<=this.vue.getNbJoueursVirtuels();i++) {
+		for (int i = 0; i <= this.vue.getNbJoueursVirtuels(); i++) {
 			Box boxJoueur = Box.createVerticalBox();
-			boxJoueur.setBorder(new EmptyBorder(10,10,10,10));
-			boxJoueur.setName("boxJoueur"+(i+1));
+			boxJoueur.setBorder(new EmptyBorder(10, 10, 10, 10));
+			boxJoueur.setName("boxJoueur" + (i + 1));
 			boxNbCartesJoueurs.add(boxJoueur);
 			JLabel labelNomJoueur = new JLabel(this.jeu.getNameJoueurByIndex(i));
-			labelNomJoueur.setName("Joueur"+(1+i));
+			labelNomJoueur.setName("Joueur" + (1 + i));
 			boxJoueur.add(labelNomJoueur);
-			JLabel labelNbCarte = new JLabel(""+this.jeu.getNombreCartesJoueurByIndex(i)+" cartes");
-			labelNbCarte.setName("NbCarteJoueur"+(i+1));
+			JLabel labelNbCarte = new JLabel("" + this.jeu.getNombreCartesJoueurByIndex(i) + " cartes");
+			labelNbCarte.setName("NbCarteJoueur" + (i + 1));
 			boxJoueur.add(labelNbCarte);
-			
-			
-			
 		}
 		Panel panelJeu = (Panel) this.vue.getComponentByName("panelJeu");
 		panelJeu.repaint();
+	}
+
+	public void updateAffichageTalon() {
+		JLabel labelTalon = (JLabel) ControllerAmerican8.this.vue.getComponentByName("labelTalon");
+		ImageIcon carte = ControllerAmerican8.this.jeu.getTalon().getCarteDessus().getImageIcon();
+		Image carteRescaled = carte.getImage().getScaledInstance(labelTalon.getWidth(), labelTalon.getHeight(),
+				Image.SCALE_DEFAULT);
+		ImageIcon imageIcon = new ImageIcon(carteRescaled);
+		labelTalon.setIcon(imageIcon);
+	}
+
+	public void updateAffichageCartesJoueurReel() {
+		JList<JLabel> listCartesJoueur =(JList<JLabel>) this.vue.getComponentByName("listCartesJoueur");
+		LinkedList<Carte> cartesJoueur = this.jeu.getJoueurReel().getMain().getCartes();
+		JLabel[] labelsCartes = new JLabel[cartesJoueur.size()];
+		for(int i=0;i<labelsCartes.length;i++) {
+			JLabel label = new JLabel(cartesJoueur.get(i).getImageIcon());
+			label.setName("labelCarte"+(i+1));
+			listCartesJoueur.add(label);
+		}
 		
-		
+
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("test");
-		JLabel label = (JLabel) this.vue.getComponentByName("infoLabel");
+		if (arg1 instanceof EventPoserCarte) {
+			EventPoserCarte poserCarte = (EventPoserCarte) arg1;
+			JLabel labelTalon = (JLabel) this.vue.getComponentByName("labelTalon");
+			this.updateAffichageTalon();
+			if (poserCarte.joueur instanceof JoueurReel) {
+				this.updateAffichageCartesJoueurReel();
+			} else if (poserCarte.joueur instanceof JoueurVirtuel) {
+				this.updateAffichageLabelNbCartes();
+			}
+		}
 		SwingUtilities.updateComponentTreeUI(ControllerAmerican8.this.vue.getFrame());
 	}
 
