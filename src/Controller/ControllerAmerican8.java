@@ -7,6 +7,7 @@ import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
@@ -28,6 +29,7 @@ import javax.swing.border.EmptyBorder;
 
 import Modele.Carte;
 import Modele.EventChangerSens;
+import Modele.EventJoueurReelJoue;
 import Modele.EventPartieTermine;
 import Modele.EventPasseTour;
 import Modele.EventPiocher;
@@ -39,6 +41,7 @@ import Modele.JoueurVirtuel;
 import Modele.Strategie;
 import Modele.Variante;
 import Vue.American8;
+import Vue.CarteCellRenderer;
 
 public class ControllerAmerican8 implements Observer, Runnable {
 
@@ -58,7 +61,6 @@ public class ControllerAmerican8 implements Observer, Runnable {
 
 		// Mise en fonctionnement du observer/observable
 		this.jeu.initObserver(this);
-		this.jeu.getJoueurReel().initObserver(this);
 		// Remplissage de la liste des variantes dispo en fonction de
 		// Variante.getAllVariantes();
 		String[] variantesNames = Variante.getAllVariantesNames();
@@ -90,6 +92,11 @@ public class ControllerAmerican8 implements Observer, Runnable {
 			}
 		});
 
+		
+		
+		
+		
+		
 		JButton btnCommencerLaPartie = (JButton) this.vue.getComponentByName("btnCommencerLaPartie");
 		btnCommencerLaPartie.addMouseListener(new MouseAdapter() {
 			@Override
@@ -107,6 +114,7 @@ public class ControllerAmerican8 implements Observer, Runnable {
 				}
 
 				ControllerAmerican8.this.initJeu(pseudo, stratJoueurs, variante);
+				ControllerAmerican8.this.jeu.getJoueurReel().initObserver(ControllerAmerican8.this);
 				ControllerAmerican8.this.thread.start();
 				// On bloque les boutons des paramètres.
 				JButton btnCommencerLaPartie = (JButton) ControllerAmerican8.this.vue
@@ -124,6 +132,20 @@ public class ControllerAmerican8 implements Observer, Runnable {
 				ImageIcon imageIcon = new ImageIcon(dosRescaled);
 				labelPioche.setIcon(imageIcon);
 
+				JButton boutonJouerCarte = (JButton) ControllerAmerican8.this.vue.getComponentByName("boutonJouerCarte");
+				boutonJouerCarte.setVisible(true);
+				boutonJouerCarte.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						JList listCartesJoueur = (JList) ControllerAmerican8.this.vue.getComponentByName("listCartesJoueur");
+						Carte carte = (Carte) listCartesJoueur.getSelectedValue();
+						ControllerAmerican8.this.jeu.getJoueurReel().setCarteAJouer(carte);
+					}
+				});
+				
+				
+				
+				ControllerAmerican8.this.vue.refreshComponentMap();
 				ControllerAmerican8.this.updateAffichageTalon();
 				ControllerAmerican8.this.updateAffichageCartesJoueurReel();
 
@@ -173,13 +195,17 @@ public class ControllerAmerican8 implements Observer, Runnable {
 	}
 
 	public void updateAffichageCartesJoueurReel() {
-		JList<String> listCartesJoueur = (JList<String>) this.vue.getComponentByName("listCartesJoueur");
+		JList<Carte> listCartesJoueur = (JList<Carte>) this.vue.getComponentByName("listCartesJoueur");
+		Box boxCartesJoueur = (Box) ControllerAmerican8.this.vue.getComponentByName("boxCartesJoueur");
 		LinkedList<Carte> cartesJoueur = this.jeu.getJoueurReel().getMain().getCartes();
-		String[] cartes = new String[cartesJoueur.size()];
+		Carte[] cartes = new Carte[cartesJoueur.size()];
 		for (int i = 0; i < cartes.length; i++) {
-			cartes[i] = cartesJoueur.get(i).getValeur() + " " + cartesJoueur.get(i).getCouleur();
+			cartes[i] = cartesJoueur.get(i);
 		}
-		listCartesJoueur.setListData(cartes);
+		listCartesJoueur = new JList<Carte>(cartes);
+		listCartesJoueur.setCellRenderer(new CarteCellRenderer());
+		listCartesJoueur.setName("listCartesJoueur");
+		boxCartesJoueur.add(listCartesJoueur);
 	}
 
 	public void updateAffichageLabelInfo(String message) {
@@ -222,12 +248,18 @@ public class ControllerAmerican8 implements Observer, Runnable {
 		}
 
 		if (arg1 instanceof EventPartieTermine) {
-			// TODO
+			this.updateAffichageLabelInfo("Partie Termine !");
 		}
 		
 		if(arg1 instanceof EventRejouer) {
 			EventRejouer rejouer = (EventRejouer) arg1;
 			this.updateAffichageLabelInfo(rejouer.joueur+" rejoue un tour !");
+		}
+		
+		if(arg1 instanceof EventJoueurReelJoue) {
+			JButton boutonJouerCarte = (JButton) this.vue.getComponentByName("boutonJouerCarte");
+			boutonJouerCarte.setEnabled(true);
+			this.updateAffichageLabelInfo("C'est à vous de jouer !");
 		}
 
 		SwingUtilities.updateComponentTreeUI(ControllerAmerican8.this.vue.getFrame());

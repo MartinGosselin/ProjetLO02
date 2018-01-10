@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 import Controller.ControllerAmerican8;
 
-public class JoueurReel extends Joueur {
+public class JoueurReel extends Joueur{
 	
+	
+	private Carte carteAJouer;
 	/**
 	 * Constructeur de la classe Joueur
 	 * @param nom Le nom du Joueur
@@ -22,6 +24,19 @@ public class JoueurReel extends Joueur {
 	
 	public JoueurReel(String nom) {
 		super(nom,0,new Main(new LinkedList<Carte>()));
+		this.carteAJouer=null;
+	}
+	
+	public void resetCarteAJouer() {
+		this.carteAJouer=null;
+	}
+	
+	public Carte getCarteAJouer() {
+		return this.carteAJouer;
+	}
+	
+	public void setCarteAJouer(Carte carte) {
+		this.carteAJouer=carte;
 	}
 	
 	/**
@@ -30,37 +45,14 @@ public class JoueurReel extends Joueur {
 	 */
 	public Carte choisirCarteAJouer(Variante v,Carte carte) {
 		this.lancerJoueurReelJoueEvent();
-		//Trouver un moyen de mettre en pause le modèle en attendant de récuperer la carte à jouer.
-		boolean numCarteValide = false;
-		int numCarte = -1;
-		ArrayList<Carte> cartesJouables = this.getCartesJouables(v, carte);
-		System.out.println("Voici votre main : ");
-		System.out.println(this.main);
-		System.out.println("La dernière carte posée sur le talon est : "+carte);
-		
-		System.out.println("Voici les cartes que vous pouvez jouer : ");
-		for(int i=0;i<cartesJouables.size();i++) {
-			System.out.print("Carte numéro "+(i+1)+" : ");
-			System.out.println(cartesJouables.get(i));
-		}
-		System.out.println("Veuillez donner le numéro de la carte que vous souhaitez jouer :");
-		Scanner reader = new Scanner(System.in);
-		
-		while (!numCarteValide) {
+		while(this.carteAJouer==null) {
 			try {
-				numCarte = reader.nextInt()-1;
-				while (!(numCarte < cartesJouables.size() && numCarte >= 0)) {
-					System.out.println("Veuillez saisir un numero de carte valide : ");
-					numCarte = reader.nextInt()-1;
-				}
-				numCarteValide = true;
-			} catch (InputMismatchException e) {
-				System.out.println("Vous devez choisir un NUMERO de carte : ");
-				reader = new Scanner(System.in);
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-
-		}		
-		return cartesJouables.get(numCarte);
+		}
+		return this.carteAJouer;
 	}
 	
 	public void lancerJoueurReelJoueEvent() {
@@ -124,5 +116,4 @@ public class JoueurReel extends Joueur {
 		}
 		return cartesJouables;
 	}
-
 }

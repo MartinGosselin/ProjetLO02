@@ -208,7 +208,7 @@ public class American8 {
 		
 		JLabel labelInfo = new JLabel();
 		labelInfo.setName("labelInfo");
-		labelInfo.setBounds(91, 83, 525, 54);
+		labelInfo.setBounds(215, 83, 401, 54);
 		panelJeu.add(labelInfo);
 
 		JPanel panel = new JPanel();
@@ -231,10 +231,11 @@ public class American8 {
 		boxCartesJoueur.setName("boxCartesJoueur");
 		panelJeu.add(boxCartesJoueur);
 		
-		JList<String> listCartesJoueur = new JList<String>();
-		//listCartesJoueur.setCellRenderer(new CarteCellRenderer());
+		JList<Carte> listCartesJoueur = new JList<Carte>();
+		listCartesJoueur.setCellRenderer(new CarteCellRenderer());
 		listCartesJoueur.setName("listCartesJoueur");
 		boxCartesJoueur.add(listCartesJoueur);
+		
 		
 		JButton boutonJouerCarte = new JButton("Jouer Carte");
 		boutonJouerCarte.setEnabled(false);
@@ -242,5 +243,6 @@ public class American8 {
 		boutonJouerCarte.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		boutonJouerCarte.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		boxCartesJoueur.add(boutonJouerCarte);
+		boutonJouerCarte.setVisible(false);
 	}
 }
