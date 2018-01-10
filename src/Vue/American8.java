@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ import java.awt.Container;
 import javax.swing.SwingConstants;
 
 import Controller.ControllerAmerican8;
+import Modele.Carte;
 
 import java.awt.Panel;
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.JComboBox;
+import javax.swing.JScrollBar;
 
 public class American8 {
 
@@ -75,7 +79,7 @@ public class American8 {
 		this.createComponentMap();
 		this.controller = new ControllerAmerican8(this);
 	}
-	
+
 	public JFrame getFrame() {
 		return this.frame;
 	}
@@ -127,7 +131,7 @@ public class American8 {
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(2);
 		splitPane.setName("splitPane");
-		splitPane.setBounds(0, 0, 776, 501);
+		splitPane.setBounds(0, 0, 1140, 778);
 		frame.getContentPane().add(splitPane);
 
 		Panel panelParametre = new Panel();
@@ -194,39 +198,49 @@ public class American8 {
 		panelJeu.setLayout(null);
 
 		Box boxJeu = Box.createVerticalBox();
-		boxJeu.setBounds(46, 5, 475, 54);
+		boxJeu.setBounds(46, 5, 624, 54);
 		boxJeu.setName("boxJeu");
 		panelJeu.add(boxJeu);
 
 		Box boxJoueurs = Box.createHorizontalBox();
 		boxJoueurs.setName("boxJoueurs");
 		boxJeu.add(boxJoueurs);
+		
+		JLabel labelInfo = new JLabel();
+		labelInfo.setName("labelInfo");
+		labelInfo.setBounds(91, 83, 525, 54);
+		panelJeu.add(labelInfo);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(84, 70, 406, 291);
+		panel.setBounds(91, 181, 529, 366);
 		panelJeu.add(panel);
 		panel.setLayout(null);
 
 		JLabel labelPioche = new JLabel();
 		labelPioche.setName("labelPioche");
-		labelPioche.setBounds(0, 0, 193, 291);
+		labelPioche.setBounds(48, 33, 196, 291);
 		panel.add(labelPioche);
 
 		JLabel labelTalon = new JLabel();
-		labelTalon.setBounds(207, 0, 196, 291);
+		labelTalon.setBounds(298, 33, 196, 291);
 		panel.add(labelTalon);
 		labelTalon.setName("labelTalon");
 
 		Box boxCartesJoueur = Box.createHorizontalBox();
-		boxCartesJoueur.setBounds(108, 444, 413, -54);
+		boxCartesJoueur.setBounds(46, 594, 624, 123);
 		boxCartesJoueur.setName("boxCartesJoueur");
 		panelJeu.add(boxCartesJoueur);
-
-		JList<JLabel> listCartesJoueur = new JList<JLabel>();
+		
+		JList<String> listCartesJoueur = new JList<String>();
+		//listCartesJoueur.setCellRenderer(new CarteCellRenderer());
 		listCartesJoueur.setName("listCartesJoueur");
 		boxCartesJoueur.add(listCartesJoueur);
-
+		
+		JButton boutonJouerCarte = new JButton("Jouer Carte");
+		boutonJouerCarte.setEnabled(false);
+		boutonJouerCarte.setName("boutonJouerCarte");
+		boutonJouerCarte.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		boutonJouerCarte.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		boxCartesJoueur.add(boutonJouerCarte);
 	}
-
-	
 }

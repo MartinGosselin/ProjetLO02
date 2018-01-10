@@ -2,8 +2,9 @@ package Modele;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Observable;
 
-public abstract class Joueur {
+public abstract class Joueur extends Observable {
 	private final String nom;
 	private int comptePoint;
 	protected Main main;
