@@ -8,6 +8,7 @@ public class EventRejouer extends EventObject {
 
 	public EventRejouer(Object arg0, Joueur joueur) {
 		super(arg0);
+		this.joueur=joueur;
 	}
 
 }

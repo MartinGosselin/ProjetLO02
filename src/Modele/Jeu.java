@@ -176,14 +176,14 @@ public class Jeu extends Observable{
 					this.pioche.getCartes().add(new Carte(couleur, valeur));
 				}
 			}
-
+			break;
 		case 32:
 			for (int i = 7; i < 13; i++) {
 				for (String couleur : Carte.COULEURS) {
 					this.pioche.getCartes().add(new Carte(couleur, Carte.VALEURS[i]));
 				}
 			}
-
+			break;
 		case 54:
 			for (String valeur : Carte.VALEURS) {
 				for (String couleur : Carte.COULEURS) {
@@ -192,6 +192,8 @@ public class Jeu extends Observable{
 			}
 			this.pioche.getCartes().add(new Carte("Carreau","Joker" ));
 			this.pioche.getCartes().add(new Carte("Pique", "Joker"));
+			break;
+
 
 		}
 		this.pioche.melanger();
@@ -269,27 +271,31 @@ public class Jeu extends Observable{
 			if (compteur >= nbJoueur) {
 				compteur = 0;
 			}
-			if (this.joueurs.get(compteur).peutJouerCartes(this.talon.getCarteDessus(), this.variante)) {
-				this.joueurs.get(compteur).poserCarte(
-						this.joueurs.get(compteur).choisirCarteAJouer(this.variante, this.talon.getCarteDessus()),
+			Joueur joueur = this.joueurs.get(compteur);
+			if (joueur.peutJouerCartes(this.talon.getCarteDessus(), this.variante)) {
+				joueur.poserCarte(
+						joueur.choisirCarteAJouer(this.variante, this.talon.getCarteDessus()),
 						this.talon);
-				this.lancerPoserCarteEvent(j,this.talon.getCarteDessus());
-				System.out.println(this.joueurs.get(compteur)+" pose un "+this.talon.getCarteDessus());
-				compteur = this.activerEffetDerniereCarte(this.joueurs.get(compteur));
+				if(joueur instanceof JoueurReel) {
+					((JoueurReel) joueur).resetCarteAJouer();
+				}
+				this.lancerPoserCarteEvent(joueur,this.talon.getCarteDessus());
+				System.out.println(joueur+" pose un "+this.talon.getCarteDessus());
+				compteur = this.activerEffetDerniereCarte(joueur);
 			} else {
-				piocheVide = !this.joueurs.get(compteur).piocher(this.pioche);
-				this.lancerPiocherEvent(this.joueurs.get(compteur),1);
-				System.out.println(this.joueurs.get(compteur)+" ne pouvait pas poser de carte ! Il pioche !");
+				piocheVide = !joueur.piocher(this.pioche);
+				this.lancerPiocherEvent(joueur,1);
+				System.out.println(joueur+" ne pouvait pas poser de carte ! Il pioche !");
 				if(piocheVide) {
 					this.pioche = new Pioche(this.talon.retournerTalon());
 					this.lancerPiocheVideEvent();
 					this.talon.addCarte(this.pioche.prendreCarte());
-					this.joueurs.get(compteur).piocher(this.pioche);
-					this.lancerPiocherEvent(this.joueurs.get(compteur),1);
+					joueur.piocher(this.pioche);
+					this.lancerPiocherEvent(joueur,1);
 				}
 			}
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 			}
 			catch(Exception e) {
 				System.out.println(e.getMessage());

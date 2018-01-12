@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Label;
@@ -15,6 +16,7 @@ import java.util.Observer;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,10 +24,13 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import Modele.Carte;
 import Modele.EventChangerSens;
@@ -48,6 +53,8 @@ public class ControllerAmerican8 implements Observer, Runnable {
 	public American8 vue;
 	public Jeu jeu;
 	public Thread thread;
+	private HashMap<JLabel, Carte> linkLabelCarte;
+	private int nbLigneEditor =0;
 
 	/*
 	 * ImageIcon icon= new ImageIcon("AsCarreau.png"); //208-303 JLabel labelTest =
@@ -58,6 +65,7 @@ public class ControllerAmerican8 implements Observer, Runnable {
 		this.vue = vue;
 		this.jeu = Jeu.getInstance();
 		this.thread = new Thread(this);
+		this.linkLabelCarte = new HashMap<JLabel,Carte>();
 
 		// Mise en fonctionnement du observer/observable
 		this.jeu.initObserver(this);
@@ -92,11 +100,6 @@ public class ControllerAmerican8 implements Observer, Runnable {
 			}
 		});
 
-		
-		
-		
-		
-		
 		JButton btnCommencerLaPartie = (JButton) this.vue.getComponentByName("btnCommencerLaPartie");
 		btnCommencerLaPartie.addMouseListener(new MouseAdapter() {
 			@Override
@@ -132,19 +135,6 @@ public class ControllerAmerican8 implements Observer, Runnable {
 				ImageIcon imageIcon = new ImageIcon(dosRescaled);
 				labelPioche.setIcon(imageIcon);
 
-				JButton boutonJouerCarte = (JButton) ControllerAmerican8.this.vue.getComponentByName("boutonJouerCarte");
-				boutonJouerCarte.setVisible(true);
-				boutonJouerCarte.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						JList listCartesJoueur = (JList) ControllerAmerican8.this.vue.getComponentByName("listCartesJoueur");
-						Carte carte = (Carte) listCartesJoueur.getSelectedValue();
-						ControllerAmerican8.this.jeu.getJoueurReel().setCarteAJouer(carte);
-					}
-				});
-				
-				
-				
 				ControllerAmerican8.this.vue.refreshComponentMap();
 				ControllerAmerican8.this.updateAffichageTalon();
 				ControllerAmerican8.this.updateAffichageCartesJoueurReel();
@@ -181,6 +171,7 @@ public class ControllerAmerican8 implements Observer, Runnable {
 			labelNbCarte.setName("NbCarteJoueur" + (i + 1));
 			boxJoueur.add(labelNbCarte);
 		}
+		this.vue.refreshComponentMap();
 		Panel panelJeu = (Panel) this.vue.getComponentByName("panelJeu");
 		panelJeu.repaint();
 	}
@@ -195,22 +186,64 @@ public class ControllerAmerican8 implements Observer, Runnable {
 	}
 
 	public void updateAffichageCartesJoueurReel() {
-		JList<Carte> listCartesJoueur = (JList<Carte>) this.vue.getComponentByName("listCartesJoueur");
 		Box boxCartesJoueur = (Box) ControllerAmerican8.this.vue.getComponentByName("boxCartesJoueur");
+		boxCartesJoueur.removeAll();
 		LinkedList<Carte> cartesJoueur = this.jeu.getJoueurReel().getMain().getCartes();
-		Carte[] cartes = new Carte[cartesJoueur.size()];
-		for (int i = 0; i < cartes.length; i++) {
-			cartes[i] = cartesJoueur.get(i);
+		ArrayList<Carte> cartesJouable = this.jeu.getJoueurReel().getCartesJouables(this.jeu.getVariante(), this.jeu.getTalon().getCarteDessus());
+		System.out.println("CartesJoueur : " +cartesJoueur);
+		System.out.println("CartesJouable : " +cartesJouable);
+		for (Carte carte : cartesJoueur) {
+			ImageIcon face = carte.getImageIcon();
+			int width = boxCartesJoueur.getWidth()/cartesJoueur.size();
+			int height = boxCartesJoueur.getHeight();
+			if(width>boxCartesJoueur.getWidth()/6) {
+				width = boxCartesJoueur.getWidth()/6;
+			}
+			Image faceRescaled = face.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+			//faire une vérif pour que ça soit jamais divisé par + de 6.
+			JLabel label = new JLabel(new ImageIcon(faceRescaled));
+			this.linkLabelCarte.put(label, carte);
+			
+			if(!cartesJouable.contains(carte)) {
+				label.setEnabled(false);
+				label.setOpaque(true);
+				label.setBackground(new Color(179, 179, 204));
+				label.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						ControllerAmerican8.this.updateAffichageInfoEditor("Ce n'est pas une carte jouable ! Choisissez en une autre !");
+					}
+
+				});
+			}
+			else {
+				label.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						ControllerAmerican8.this.jeu.getJoueurReel().setCarteAJouer(ControllerAmerican8.this.linkLabelCarte.get(e.getComponent()));		
+					}
+
+				});
+				
+			}
+			boxCartesJoueur.add(label);
 		}
-		listCartesJoueur = new JList<Carte>(cartes);
-		listCartesJoueur.setCellRenderer(new CarteCellRenderer());
-		listCartesJoueur.setName("listCartesJoueur");
-		boxCartesJoueur.add(listCartesJoueur);
+		Panel panelJeu = (Panel) this.vue.getComponentByName("panelJeu");
+		panelJeu.repaint();
 	}
 
-	public void updateAffichageLabelInfo(String message) {
-		JLabel labelInfo = (JLabel) this.vue.getComponentByName("labelInfo");
-		labelInfo.setText(message);
+	public void updateAffichageInfoEditor(String message) {
+		JEditorPane infoPane = (JEditorPane) this.vue.getComponentByName("infoPane");
+		try {
+			if(this.nbLigneEditor>18) {
+				infoPane.setDocument(new PlainDocument());
+				this.nbLigneEditor=0;
+			}
+			infoPane.getDocument().insertString(infoPane.getDocument().getLength(), message+"\n", null);
+			this.nbLigneEditor++;
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -227,39 +260,32 @@ public class ControllerAmerican8 implements Observer, Runnable {
 
 		if (arg1 instanceof EventChangerSens) {
 			EventChangerSens changerSens = (EventChangerSens) arg1;
-			this.updateAffichageLabelInfo("Le jeu change de sens !");
+			this.updateAffichageInfoEditor("Le jeu change de sens !");
 		}
 
 		if (arg1 instanceof EventPasseTour) {
 			EventPasseTour passeTour = (EventPasseTour) arg1;
-			this.updateAffichageLabelInfo(passeTour.joueur + " fait passer le tour de " + passeTour.cible);
-		}
-
-		if (arg1 instanceof EventPasseTour) {
-			EventPasseTour passeTour = (EventPasseTour) arg1;
-			this.updateAffichageLabelInfo(passeTour.joueur + " fait passer le tour de " + passeTour.cible);
-		}
-
+			this.updateAffichageInfoEditor(passeTour.joueur + " fait passer le tour de " + passeTour.cible);
+		} 
+		
 		if (arg1 instanceof EventPiocher) {
 			EventPiocher piocher = (EventPiocher) arg1;
-			this.updateAffichageLabelInfo(piocher.joueur + " pioche " + piocher.nbCarte + " carte(s) !");
+			this.updateAffichageInfoEditor(piocher.joueur + " pioche " + piocher.nbCarte + " carte(s) !");
 			this.updateAffichageLabelNbCartes();
 			this.updateAffichageCartesJoueurReel();
 		}
 
 		if (arg1 instanceof EventPartieTermine) {
-			this.updateAffichageLabelInfo("Partie Termine !");
+			this.updateAffichageInfoEditor("Partie Termine !");
 		}
-		
-		if(arg1 instanceof EventRejouer) {
+
+		if (arg1 instanceof EventRejouer) {
 			EventRejouer rejouer = (EventRejouer) arg1;
-			this.updateAffichageLabelInfo(rejouer.joueur+" rejoue un tour !");
+			this.updateAffichageInfoEditor(""+rejouer.joueur + " rejoue un tour !");
 		}
-		
-		if(arg1 instanceof EventJoueurReelJoue) {
-			JButton boutonJouerCarte = (JButton) this.vue.getComponentByName("boutonJouerCarte");
-			boutonJouerCarte.setEnabled(true);
-			this.updateAffichageLabelInfo("C'est à vous de jouer !");
+
+		if (arg1 instanceof EventJoueurReelJoue) {
+			this.updateAffichageInfoEditor("C'est à vous de jouer !");
 		}
 
 		SwingUtilities.updateComponentTreeUI(ControllerAmerican8.this.vue.getFrame());

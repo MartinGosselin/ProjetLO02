@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.ListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Box;
@@ -22,6 +23,8 @@ import java.awt.Component;
 import java.awt.Container;
 
 import javax.swing.SwingConstants;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 
 import Controller.ControllerAmerican8;
 import Modele.Carte;
@@ -39,6 +42,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
+import javax.swing.JEditorPane;
 
 public class American8 {
 
@@ -198,7 +202,7 @@ public class American8 {
 		panelJeu.setLayout(null);
 
 		Box boxJeu = Box.createVerticalBox();
-		boxJeu.setBounds(46, 5, 624, 54);
+		boxJeu.setBounds(46, 18, 489, 54);
 		boxJeu.setName("boxJeu");
 		panelJeu.add(boxJeu);
 
@@ -206,13 +210,14 @@ public class American8 {
 		boxJoueurs.setName("boxJoueurs");
 		boxJeu.add(boxJoueurs);
 		
-		JLabel labelInfo = new JLabel();
-		labelInfo.setName("labelInfo");
-		labelInfo.setBounds(215, 83, 401, 54);
-		panelJeu.add(labelInfo);
+		JEditorPane infoPane = new JEditorPane();
+		infoPane.setBounds(616, 18, 296, 318);
+		infoPane.setDocument(new PlainDocument());
+		infoPane.setName("infoPane");
+		panelJeu.add(infoPane);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(91, 181, 529, 366);
+		panel.setBounds(46, 145, 529, 366);
 		panelJeu.add(panel);
 		panel.setLayout(null);
 
@@ -227,7 +232,7 @@ public class American8 {
 		labelTalon.setName("labelTalon");
 
 		Box boxCartesJoueur = Box.createHorizontalBox();
-		boxCartesJoueur.setBounds(46, 594, 624, 123);
+		boxCartesJoueur.setBounds(46, 594, 791, 123);
 		boxCartesJoueur.setName("boxCartesJoueur");
 		panelJeu.add(boxCartesJoueur);
 		
@@ -235,14 +240,5 @@ public class American8 {
 		listCartesJoueur.setCellRenderer(new CarteCellRenderer());
 		listCartesJoueur.setName("listCartesJoueur");
 		boxCartesJoueur.add(listCartesJoueur);
-		
-		
-		JButton boutonJouerCarte = new JButton("Jouer Carte");
-		boutonJouerCarte.setEnabled(false);
-		boutonJouerCarte.setName("boutonJouerCarte");
-		boutonJouerCarte.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		boutonJouerCarte.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		boxCartesJoueur.add(boutonJouerCarte);
-		boutonJouerCarte.setVisible(false);
 	}
 }
